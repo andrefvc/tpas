@@ -14,6 +14,7 @@ var responseJSON = function(message=''){
   this.Message = message;
   this.Data = { };
 }
+
 exports.responseJSON = responseJSON;
 
 var parseError = function(err, data){
