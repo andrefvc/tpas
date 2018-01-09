@@ -1,0 +1,2129 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "RESTfull API baseada em node.js Com o objetivo da partilha de viagens e experiencias vividas, classificações e comentáriosentre utilizadores. Disponível em https://tppweb.herokuapp.com",
+    "version": "2.0.0",
+    "title": "Trips Together",
+    "contact": {
+      "email": "o.nosso.email@gmail.com"
+    }
+  },
+  "externalDocs": {
+    "description": "Source Code",
+    "url": "https://github.com/andrefvc/tppweb"
+  },
+  "produces": [
+    "application/json"
+  ],
+  "host": "tppweb.herokuapp.com",
+  "basePath": "/api/v2",
+  "paths": {
+    "/viagens": {
+      "get": {
+        "tags": [
+          "Viagens"
+        ],
+        "summary": "Obter viagens",
+        "description": "Obter todas as viagens ou filtrar entre todas as viagens",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Filtros predefinidos",
+            "type": "string",
+            "enum": [
+              "publicas",
+              "minhas",
+              "todas"
+            ]
+          },
+          {
+            "name": "filtro",
+            "in": "query",
+            "description": "Conteúdo da pesquisa a ser efetuada nos campos [Pais], [Cidade] e [Descrição]",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Viagens"
+        ],
+        "summary": "Inserir uma viagem",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "idUtilizador",
+            "in": "formData",
+            "description": "ID Utilizador",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partilhado",
+            "in": "formData",
+            "description": "Viagem partilhada",
+            "type": "boolean",
+            "required": true,
+            "default": false
+          },
+          {
+            "name": "popular",
+            "in": "formData",
+            "description": "Viagem popular",
+            "type": "boolean",
+            "required": true,
+            "default": false
+          },
+          {
+            "name": "pais",
+            "in": "formData",
+            "description": "Pais de destino",
+            "type": "string"
+          },
+          {
+            "name": "cidade",
+            "in": "formData",
+            "description": "Cidade de destino",
+            "type": "string"
+          },
+          {
+            "name": "latitude",
+            "in": "formData",
+            "description": "Coordenadas de latitude",
+            "type": "string"
+          },
+          {
+            "name": "longitude",
+            "in": "formData",
+            "description": "Coordenadas de longitude",
+            "type": "string"
+          },
+          {
+            "name": "dataInicio",
+            "in": "formData",
+            "description": "Data de inicio da viagem",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "dataFim",
+            "in": "formData",
+            "description": "Data de fim da viagem",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "descricao",
+            "in": "formData",
+            "description": "Descrição da viagem",
+            "type": "string"
+          },
+          {
+            "name": "ficheiros",
+            "in": "formData",
+            "description": "imagem associada a viagem",
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Viagem inserida com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/viagens/{id}": {
+      "get": {
+        "tags": [
+          "Viagens"
+        ],
+        "summary": "Obtem todos os dados de uma viagem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID Viagem",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Viagem obtida com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Viagens"
+        ],
+        "summary": "Atualiza uma viagem existente",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da viagem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partilhado",
+            "in": "formData",
+            "description": "Viagem partilhada",
+            "type": "boolean",
+            "required": true,
+            "default": false
+          },
+          {
+            "name": "popular",
+            "in": "formData",
+            "description": "Viagem popular",
+            "type": "boolean",
+            "required": true,
+            "default": false
+          },
+          {
+            "name": "pais",
+            "in": "formData",
+            "description": "Pais de destino",
+            "type": "string"
+          },
+          {
+            "name": "cidade",
+            "in": "formData",
+            "description": "Cidade de destino",
+            "type": "string"
+          },
+          {
+            "name": "latitude",
+            "in": "formData",
+            "description": "Coordenadas de latitude",
+            "type": "string"
+          },
+          {
+            "name": "longitude",
+            "in": "formData",
+            "description": "Coordenadas de longitude",
+            "type": "string"
+          },
+          {
+            "name": "dataInicio",
+            "in": "formData",
+            "description": "Data de inicio da viagem",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "dataFim",
+            "in": "formData",
+            "description": "Data de fim da viagem",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "descricao",
+            "in": "formData",
+            "description": "Descrição da viagem",
+            "type": "string"
+          },
+          {
+            "name": "ficheiros",
+            "in": "formData",
+            "description": "imagem associada a viagem",
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Viagem atualizada com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Viagens"
+        ],
+        "summary": "Remover uma viagem por id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da viagem",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Viagem removida com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/viagens/utilizador/{idUtilizador}": {
+      "get": {
+        "tags": [
+          "Viagens"
+        ],
+        "summary": "Filtra todas as viagens por utilizador",
+        "parameters": [
+          {
+            "name": "idUtilizador",
+            "in": "path",
+            "description": "ID do utilizador",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Viages obtidas com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/viagens/cidade/{cidade}": {
+      "get": {
+        "tags": [
+          "Viagens"
+        ],
+        "summary": "Filtra todas as viagens por cidade",
+        "parameters": [
+          {
+            "name": "cidade",
+            "in": "path",
+            "description": "Nome da cidade",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Viages obtidas com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/momentos": {
+      "post": {
+        "tags": [
+          "Momentos"
+        ],
+        "summary": "Adiciona uma novo momento",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "idViagem",
+            "in": "formData",
+            "description": "ID Viagem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pais",
+            "in": "formData",
+            "description": "Pais de destino",
+            "type": "string"
+          },
+          {
+            "name": "cidade",
+            "in": "formData",
+            "description": "Cidade de destino",
+            "type": "string"
+          },
+          {
+            "name": "latitude",
+            "in": "formData",
+            "description": "Coordenadas de latitude",
+            "type": "string"
+          },
+          {
+            "name": "longitude",
+            "in": "formData",
+            "description": "Coordenadas de longitude",
+            "type": "string"
+          },
+          {
+            "name": "dataInicio",
+            "in": "formData",
+            "description": "Data de inicio do momento",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "dataFim",
+            "in": "formData",
+            "description": "Data de fim do momento",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "descricao",
+            "in": "formData",
+            "description": "Descrição do momento",
+            "type": "string"
+          },
+          {
+            "name": "narrativa",
+            "in": "formData",
+            "description": "Narrativa do momento",
+            "type": "string"
+          },
+          {
+            "name": "ficheiros",
+            "in": "formData",
+            "description": "imagem associada ao momento",
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso ao gravar dados",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/momentos/viagem/{idViagem}": {
+      "get": {
+        "tags": [
+          "Momentos"
+        ],
+        "summary": "Obtem todos um momento",
+        "parameters": [
+          {
+            "name": "idViagem",
+            "in": "path",
+            "description": "ID Viagem",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/momentos/{id}": {
+      "get": {
+        "tags": [
+          "Momentos"
+        ],
+        "summary": "Obter um momento",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID momento",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Momentos"
+        ],
+        "summary": "Atualiza um momento existente",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID momento",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pais",
+            "in": "formData",
+            "description": "Pais de destino",
+            "type": "string"
+          },
+          {
+            "name": "cidade",
+            "in": "formData",
+            "description": "Cidade de destino",
+            "type": "string"
+          },
+          {
+            "name": "latitude",
+            "in": "formData",
+            "description": "Coordenadas de latitude",
+            "type": "string"
+          },
+          {
+            "name": "longitude",
+            "in": "formData",
+            "description": "Coordenadas de longitude",
+            "type": "string"
+          },
+          {
+            "name": "dataInicio",
+            "in": "formData",
+            "description": "Data de inicio do momento",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "dataFim",
+            "in": "formData",
+            "description": "Data de fim do momento",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "descricao",
+            "in": "formData",
+            "description": "Descrição do momento",
+            "type": "string"
+          },
+          {
+            "name": "narrativa",
+            "in": "formData",
+            "description": "Narrativa do momento",
+            "type": "string"
+          },
+          {
+            "name": "ficheiros",
+            "in": "formData",
+            "description": "imagem associada ao momento",
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso ao gravar dados",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Momentos"
+        ],
+        "summary": "Remove um momento por id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID momento",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Momento removida com sucesso",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/momentos/cidade/{cidade}": {
+      "get": {
+        "tags": [
+          "Momentos"
+        ],
+        "summary": "Filtra todas as momentos por cidade",
+        "parameters": [
+          {
+            "name": "cidade",
+            "in": "path",
+            "description": "Nome da cidade",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Viages obtidas com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/utilizadores": {
+      "get": {
+        "tags": [
+          "Utilizadores"
+        ],
+        "summary": "Obter utilizadores",
+        "description": "Obtem uma listagem com todos os utilizadores ou filtrados por nome",
+        "parameters": [
+          {
+            "name": "filtro",
+            "in": "query",
+            "description": "Filtro a ser aplicado no campo nome do utilizador",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/utilizadores/{id}": {
+      "get": {
+        "tags": [
+          "Utilizadores"
+        ],
+        "summary": "Obter um utilizador",
+        "description": "Obtem um utilizador atraves do seu ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do utilizador",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "Autenticação"
+        ],
+        "summary": "Autenticação na API através de email e password",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "formData",
+            "description": "email do utilizador para autenticação",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "password do utilizador para autenticação",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Autenticação efetuada com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Erro na autenticação",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/loginFacebook": {
+      "post": {
+        "tags": [
+          "Autenticação"
+        ],
+        "summary": "Autenticação na API baseada nos dados obtidos através dos dados obtidos pelo Facebook",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "facebookID",
+            "in": "formData",
+            "description": "ID obtido pelo facebook para autenticação na API",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Autenticação efetuada com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Erro na autenticação",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/registo": {
+      "post": {
+        "tags": [
+          "Autenticação"
+        ],
+        "summary": "Registo e login na API",
+        "description": "Regista os dados do utilizador e efetua o login na API",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "formData",
+            "description": "Nome do utilizador",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "email",
+            "in": "formData",
+            "description": "Email do utilizador",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "Password do utilizador",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registo e autenticação efetuada com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Erro na autenticação",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/logout": {
+      "post": {
+        "tags": [
+          "Autenticação"
+        ],
+        "summary": "Limpar a autenticação do utilizador na API",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Logout efetuado com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bucketlist/utilizador/{id}": {
+      "get": {
+        "tags": [
+          "Bucket list"
+        ],
+        "summary": "Obter bucket list de viagens de um utilizador",
+        "description": "Obtem todos as viagens existentes na bucket list de um utilizador",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do utilizador",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bucketlist/{id}": {
+      "delete": {
+        "tags": [
+          "Bucket list"
+        ],
+        "summary": "Remover uma viagem da bucket list",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do item na bucket list",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Viagem removida com sucesso da bucket list",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/classificacao/viagem/{id}": {
+      "get": {
+        "tags": [
+          "Classificação"
+        ],
+        "summary": "Obter classificações de uma viagem",
+        "description": "Obtem todos as classificações a uma determinada viagem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da viagem",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/classificacao/momento/{id}": {
+      "get": {
+        "tags": [
+          "Classificação"
+        ],
+        "summary": "Obter classificações de um momento",
+        "description": "Obtem todos as classificações a um determinado momento",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do momento",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/classificacao": {
+      "post": {
+        "tags": [
+          "Classificação"
+        ],
+        "summary": "Inserir uma viagem",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "classifica",
+            "in": "formData",
+            "description": "Classificação aplicada",
+            "type": "integer",
+            "enum": [
+              "Já fui muito feliz aqui",
+              "Nunca tinha experimentado, estou maravilhado",
+              "Este vai direto para a minha bucket list"
+            ]
+          },
+          {
+            "name": "idUtilizador",
+            "in": "formData",
+            "description": "ID do utilizador que classifica a viagem",
+            "type": "string"
+          },
+          {
+            "name": "idViagem",
+            "in": "formData",
+            "description": "ID da viagem a classificar (para o caso de classificar uma viagem)",
+            "type": "string"
+          },
+          {
+            "name": "idMomento",
+            "in": "formData",
+            "description": "ID do momento a classificar (para o caso de classificar um momento)",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Viagem inserida com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "o momemto ja foi classificado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/comentarios": {
+      "post": {
+        "tags": [
+          "Comentários"
+        ],
+        "summary": "Inserir uma viagem",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "idMomento",
+            "in": "formData",
+            "description": "ID do momento (no caso de comentar um momento)",
+            "type": "string"
+          },
+          {
+            "name": "idViagem",
+            "in": "formData",
+            "description": "ID da viagem (no caso de comentar uma viagem)",
+            "type": "string"
+          },
+          {
+            "name": "idUtilizador",
+            "in": "formData",
+            "description": "ID do utilizador",
+            "type": "string"
+          },
+          {
+            "name": "comentario",
+            "in": "formData",
+            "description": "contúdo docomentário",
+            "type": "string"
+          },
+          {
+            "name": "_user",
+            "in": "formData",
+            "description": "ID interno do utilizador",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Viagem inserida com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/comentarios/{id}": {
+      "delete": {
+        "tags": [
+          "Comentários"
+        ],
+        "summary": "Remover um comentário por id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do comentário",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comentário removido com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/comentarios/utilizador/{id}": {
+      "get": {
+        "tags": [
+          "Comentários"
+        ],
+        "summary": "Obter os comentários de um utilizador",
+        "description": "Obtem todos os comentários de um determinado utilizador",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do utilizador",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/comentarios/viagem/{id}": {
+      "get": {
+        "tags": [
+          "Comentários"
+        ],
+        "summary": "Obter os comentários de uma viagem",
+        "description": "Obtem todos os comentários de uma viagem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da viagem",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/comentarios/momento/{id}": {
+      "get": {
+        "tags": [
+          "Comentários"
+        ],
+        "summary": "Obter os comentários de um momento",
+        "description": "Obtem todos os comentários de um determinado momento",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do momento",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/localizacao/lat/{lat}/lng/{lng}": {
+      "get": {
+        "tags": [
+          "Localização"
+        ],
+        "summary": "Obtem a cidade e país através das coordenadas",
+        "description": "Com base nas coordenadas são devolvidos o nome da cidade e país correspondente",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "path",
+            "description": "latitude",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lng",
+            "in": "path",
+            "description": "longitude",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/localizacao/cidade/{cidade}/pais/{pais}": {
+      "get": {
+        "tags": [
+          "Localização"
+        ],
+        "summary": "Obtem coordenadas",
+        "description": "Obtem as coordenadas através do nome de uma cidade e um país",
+        "parameters": [
+          {
+            "name": "cidade",
+            "in": "path",
+            "description": "Cidade",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pais",
+            "in": "path",
+            "description": "Pais",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/localizacao/meteo/lat/{lat}/lng/{lng}": {
+      "get": {
+        "tags": [
+          "Localização"
+        ],
+        "summary": "Obtem informação metereológica",
+        "description": "Obtem informação metereológica sobre a localização das coordenadas inseridas",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "path",
+            "description": "latitude",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lng",
+            "in": "path",
+            "description": "longitude",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/localizacao/meteo/cidade/{cidade}/pais/{pais}": {
+      "get": {
+        "tags": [
+          "Localização"
+        ],
+        "summary": "Obtem informação metereológica",
+        "description": "Obtem informação metereológica sobre a localização com base na cidade e país inseridos",
+        "parameters": [
+          {
+            "name": "cidade",
+            "in": "path",
+            "description": "Cidade",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pais",
+            "in": "path",
+            "description": "Pais",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notificacoes/utilizador/{id}/naolidas": {
+      "get": {
+        "tags": [
+          "Notificações"
+        ],
+        "summary": "Notificações não lidas de um utilizador",
+        "description": "Obtem todas as notificações por ler de um utilizador",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID utilizador",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notificacoes/utilizador/{id}": {
+      "get": {
+        "tags": [
+          "Notificações"
+        ],
+        "summary": "Todas as notificações de um utilizador",
+        "description": "Obtem todas as notificações de um utilizador",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID utilizador",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notificacoes/{id}": {
+      "put": {
+        "tags": [
+          "Notificações"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Atualiza uma notificação",
+        "description": "Atualiza os dados de uma notificação",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da notificação",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lida",
+            "in": "formData",
+            "description": "notificação lida ou por ler",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Notificações"
+        ],
+        "summary": "Remove uma notificação",
+        "description": "Remove os dados de uma notificação",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da notificação",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Response": {
+      "type": "object",
+      "properties": {
+        "ErroCorde": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "Error": {
+          "type": "object"
+        },
+        "Data": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

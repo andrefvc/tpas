@@ -1,0 +1,205 @@
+ <div ng-include="'views/comentarios.html'" id="responsive" class="modal fade" tabindex="-1" data-width="660"></div>
+  <div ng-init="getMomentos();" id="modalAddMomento" class="modal fade" tabindex="-1" data-width="760">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">Adicionar momento</h4>
+    </div>
+    <div class="modal-body" >
+        <div class="row">
+            <div class="col-md-12">
+                <form action="#" class="form-horizontal form-bordered">
+                    <div class="form form-body">
+                        
+                        <div class="form-group">
+                            <label class="control-label col-md-1">Data</label>
+                            <div class="col-md-8">
+                                
+                                <div class="input-group input-medium date-picker input-daterange" data-date-format="dd-mm-yyyy">
+                                    <input ng-readonly="true" type="text" ng-model="dataInicio" class="form-control" name="from">
+                                    <span class="input-group-addon"> até </span>
+                                    <input ng-readonly="true" type="text" ng-model="dataFim" class="form-control" name="to"> </div>
+                                <!-- /input-group -->
+                            </div>
+                           
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                               Narrativa
+                                <textarea class="form-control todo-taskbody-taskdesc" ng-model="narrativa" rows="3" placeholder="Narrativa"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                Descrição
+                                <textarea class="form-control todo-taskbody-taskdesc" ng-model="descricao" rows="3" placeholder="Descrição"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <label class="control-label col-md-2">Imagem</label>
+                            <div class="col-md-10">
+                                 <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"> </div>
+                                    <div>
+                                        <span class="btn red btn-outline btn-file">
+                                            <span class="fileinput-new"> Selecionar imagem </span>
+                                            <span class="fileinput-exists"> Alterar </span>
+                                            <input ng-file="image" type="file" name="file"> </span>
+                                        <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Apagar </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>   
+
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <div class="row" style="padding-top: 5px; background-color: #eee" > 
+                                    <figure class="icons">
+                                        <div ng-repeat="temp in temperatura | limitTo: 6" class="col-md-2" style="text-align: center;">
+                                            <canvas class="{{temp.icon}}" width="40" height="40">
+                                            </canvas>
+                                        </div>
+                                    </figure>
+                                </div>
+                                <div class="row" style="margin-bottom: 10px; padding-top: 5px; background-color: #eee">
+                                    <div ng-repeat="temp in temperatura | limitTo: 6" class="col-md-2" style="text-align: center;">
+                                        <span class="itemWeather">{{temp.temperatureMin}}ºC - {{temp.temperatureMax}}ºC</span><br>
+                                        <span class="summaryWeather">{{temp.summary}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="gmap_geocoding_address" placeholder="Morada...">
+                                        <span class="input-group-btn">
+                                            <button class="btn blue" id="gmap_geocoding_btn">
+                                                <i class="fa fa-search"></i>
+                                        </span>
+                                    </div>
+                                <div id="gmap_geocoding" class="gmaps"> </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+    <div class="modal-footer">
+        <a type="button" ng-click="insertMomento();" data-dismiss="modal" class="btn btn-outline green" >
+                       Gravar
+                       <i class="fa fa-save"></i>
+                        </a>
+                         <a type="button"  data-dismiss="modal"  class="btn btn-outline dark" >
+                        Fechar
+                        <i class="fa fa-remove"></i>
+                        </a>
+    </div>
+</div>
+
+<div class="blog-page blog-content-1">
+    <link href="../stylesheets/blog.css" rel="stylesheet" type="text/css" />    
+
+
+<button ng-show="isOwnerMomentos();"  ng-click="openModalMomento();" class="btn btn-outline green"> 
+        <i class="icon-plus" > </i>
+        Novo
+</button>
+   
+                                       </p>
+
+                 <p style="text-align: center;"> <b> MOMENTOS </b></p>                      
+
+<div class="animate-repeat" ng-repeat="momento in momentos"> 
+                    
+    <div class="portlet-body">
+        <div class="mt-timeline-2">
+            <div class="mt-timeline-line border-grey-steel"style="left:10%"></div>
+            <ul class="mt-container">
+                
+                <div class="mt-title">
+                        {{ momento.dataInicio | date : format : timezone }}
+                        </p>
+                    </div> 
+                
+                
+                <li class="mt-item" style="margin-left:0px !important; margin-right:30 !important;">
+                    
+
+                    <div class="mt-timeline-icon bg-blue bg-font-blue border-grey-steel" style="left:15%">
+                        <i class="icon-plane"></i>
+                    
+                    </div>
+                    
+                    
+                            
+                    <div class="mt-timeline-content" style="width:85%" >
+                        <div class="mt-content-container"style="width:85%">	
+                            <div style="cursor:pointer" title="Remover" class="btn btn-circle btn-icon-only btn-default">
+                                <i  class="icon-trash" ng-click="apagarMomento(momento)"></i>
+                            </div>
+                            <div class="mt-title"style="width:85%">
+                                <div class="mt-content-title" style="width:100%">
+                                                                                            
+                                        <small>{{ momento.cidade }}</small>,
+                                        {{ momento.pais }}
+                                </div>
+                                                                                        
+                            </div>
+                            
+                            <div class="mt-content border-grey-salt">
+                                        <b> narrativa</b> <br>     
+                                        {{ momento.narrativa}}                
+                                    <br> 
+                                    <div class="mt-content border-grey-salt"> 
+                                <img src="{{ momento.ficheiros.nome }}" style="float:center;  max-width: 768px; max-height: 300px;  "/> 
+                                        <!-- <img src="api/v2/viagens/ficheiros/7966355a-cec2-46c4-af02-8dda7da21b8c" width="750px" height="500px" /> --> 
+                                    </div>
+                                        <br>
+                                        <b> descricao </b> <br>     
+                                        {{ momento.descricao}}  
+                            </div>
+                        <div class="mt-content border-grey-salt">
+                                <div class="blog-post-foot">     
+                                    <div  ng-click="classifica(1, momento);">
+                                        <a id="class1" href="javascript:;" class="pull-left" style="margin-left: 10px;" title="Já fui muito feliz aqui!">
+                                            <i style="font-size: x-large;" class="fa fa-plane"></i>
+                                        </a>
+                                        <a style="text-decoration: none; margin-left: 5px;" class="pull-left" href="javascript:;">{{ momento.class1 }}</a>
+                                    </div>
+                                    <div  ng-click="classifica(2, momento);">
+                                        <a id="class2" href="javascript:;" class="pull-left" style="margin-left: 10px;" title="Nunca tinha experimentado, estou maravilhado!">
+                                            <i style="font-size: x-large;" class="fa fa-thumbs-up"></i>
+                                        </a>
+                                        <a style="text-decoration: none; margin-left: 5px;" class="pull-left" href="javascript:;">{{ momento.class2 }}</a>
+                                    </div>
+                                    <div ng-click="classifica(3, momento);">
+                                        <a id="class3" href="javascript:;" class="pull-left" style="margin-left: 10px;" title="Este vai direto para a minha bucket list!">
+                                            <i style="font-size: x-large;" class="fa fa-th-list"></i>
+                                        </a>
+                                        <a style="text-decoration: none; margin-left: 5px;" ng-style="{ 'color: #b77433': momento.partilhado }"
+                                        class="pull-left" href="javascript:;">{{ momento.class3 }}</a>
+                                    </div>
+
+
+                            
+                                    <div class="blog-post-meta pull-right">
+                                        <i class="icon-bubble font-blue"></i>
+                                        <a ng-click="viewCommentsMomentos(momento);" href="javascript:;">{{momento.sumComentarios}} Comentários</a>
+                                    </div>
+                                </div>
+                        </div>
+
+                    </div>
+                        
+                    </li>
+            </ul>
+        </div>
+    </div>                                                                      
+ </div>

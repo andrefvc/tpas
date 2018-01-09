@@ -1,0 +1,124 @@
+       
+<!-- BEGIN HEADER INNER -->
+<div class="page-header-inner ">
+    <!-- BEGIN LOGO -->
+    <div class="page-logo" style="width: 180px;">
+        <a href="#!/">
+            <img src="../img/tripstogether.png" style="width: 115px;     margin: 3px 0 0;" alt="logo" class="logo-default" /> </a>
+    </div>
+    <!-- END LOGO -->
+    <!-- BEGIN MEGA MENU -->
+    <div class="hor-menu">
+        <ul class="nav navbar-nav">
+            <!-- DOC: Remove data-hover="megamenu-dropdown" and data-close-others="true" attributes below to disable the horizontal opening on mouse hover -->
+            <li ng-show="currentUser"  class="classic-menu-dropdown" aria-haspopup="true">
+                <a href="#!/viagens?query=minhas"> Minhas Viagens
+                    <span class="selected"> </span>
+                </a>
+            </li>  
+            <li ng-show="currentUser" class="classic-menu-dropdown" aria-haspopup="true">
+                <a href="#!/viagens?query=partilhadas"> Outras Viagens
+                    <span class="selected"> </span>
+                </a>
+            </li>  
+            <li ng-show="currentUser" class="classic-menu-dropdown" aria-haspopup="true">
+                <a href="#!/viagens?query=todas"> Todas Viagens
+                    <span class="selected"> </span>
+                </a>
+            </li>
+            <li ng-show="!currentUser" class="classic-menu-dropdown" aria-haspopup="true">
+                <a href="#!/publicViagens?query=publicas"> Viagens
+                    <span class="selected"> </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- END MEGA MENU -->
+    
+    <!-- BEGIN HEADER SEARCH BOX -->
+    <form  ng-show="currentUser" class="search-form search-form-collapsed" action="#!/search" method="GET">
+        <div class="input-group">            
+            <span class="input-group-btn">
+                <a href="#!/search" class="btn submit">
+                    <i class="icon-magnifier"></i>
+                </a>
+            </span>
+        </div>
+    </form>
+    <!-- END HEADER SEARCH BOX -->
+    <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+    <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+        <span></span>
+    </a>
+    <!-- END RESPONSIVE MENU TOGGLER -->
+    <!-- BEGIN TOP NAVIGATION MENU -->
+    <div class="top-menu">
+        <ul class="nav navbar-nav pull-right">                            
+            <!-- BEGIN INBOX DROPDOWN -->
+            <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+            <li ng-show="currentUser" class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
+                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                    <i class="icon-envelope-open"></i>
+                    <span ng-show="notificacoes" class="badge badge-default"> {{notificacoes.length}}  </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="external">
+                        <h3>Tem
+                            <span ng-show="notificacoes" class="bold">{{notificacoes.length}} Novas</span> Notificações</h3>
+                        <a href="#!/profile?id={{ currentUser.id }}">Ver todas...</a>
+                    </li>
+                    <li>
+                        <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
+                            <li ng-repeat="notificacao in notificacoes">
+                                <a ng-click="limparNotificacao(notificacao.id);">
+                                    <span class="photo">
+                                        <img src="{{notificacao._user.foto}}" class="img-circle" alt=""> </span>
+                                    <span class="subject">
+                                        <span class="from"> {{notificacao._user.nome}} </span>
+                                        <span class="time">{{notificacao.dataInsercao | date : format : timezonen}} </span>
+                                    </span>
+                                    <span class="message"> {{notificacao.descricao}} </span>
+                                </a>
+                            </li>                                    
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            
+            <li ng-show="currentUser" class="dropdown dropdown-user">
+                <a href="#!/profile?id={{currentUser.id}}" class="dropdown-toggle" data-close-others="true">
+                    <img ng-show="currentUser.foto" alt="" class="img-circle" src="{{ currentUser.foto }}"/>
+                    <span class="username username-hide-on-mobile" > {{ currentUser.nome }}  </span>                                    
+                </a>                                
+            </li>
+
+            <li ng-show="!currentUser"  class="dropdown dropdown-user">
+                <a href="#!/login" class="dropdown-toggle" data-close-others="true">
+                    <span class="username username-hide-on-mobile"> Login </span>
+                </a>                                
+            </li>
+
+            <!-- END USER LOGIN DROPDOWN -->
+            <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+            <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+            <li ng-controller="LoginController" ng-show="currentUser" class="dropdown dropdown-quick-sidebar-toggler">
+                <a ng-click="logout()"  class="dropdown-toggle">
+                    <i class="icon-logout"></i>
+                </a>
+            </li>
+            <!-- END QUICK SIDEBAR TOGGLER -->
+        </ul>
+    </div>
+    <!-- END TOP NAVIGATION MENU -->
+</div>
+<!-- END HEADER INNER -->
+
+<script>
+    $(document).ready(function()
+    {
+        $('.classic-menu-dropdown').click(function(){
+            $(".classic-menu-dropdown").removeClass("active");
+            $(this).toggleClass('active');
+        });
+    })            
+</script>

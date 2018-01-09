@@ -1,0 +1,546 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "RESTfull API desenvolvida em node.js Com o objetivo da partilha de viagens e experiencias vividas durante as viagens com todos os amigos. Disponível em https://tppweb.herokuapp.com",
+    "version": "2.0.0",
+    "title": "Trips Together",
+    "contact": {
+      "email": "o.nosso.email@gmail.com"
+    }
+  },
+  "externalDocs": {
+    "description": "Source Code",
+    "url": "https://github.com/andrefvc/tppweb"
+  },
+  "produces": [
+    "application/json"
+  ],
+  "host": "localhost:3000",
+  "basePath": "/api/v2",
+  "paths": {
+    "/momentos": {
+      "post": {
+        "tags": [
+          "Momentos"
+        ],
+        "summary": "Adiciona uma novo momento",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "idViagem",
+            "in": "formData",
+            "description": "ID Viagem",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pais",
+            "in": "formData",
+            "description": "Pais de destino",
+            "type": "string"
+          },
+          {
+            "name": "cidade",
+            "in": "formData",
+            "description": "Cidade de destino",
+            "type": "string"
+          },
+          {
+            "name": "latitude",
+            "in": "formData",
+            "description": "Coordenadas de latitude",
+            "type": "string"
+          },
+          {
+            "name": "longitude",
+            "in": "formData",
+            "description": "Coordenadas de longitude",
+            "type": "string"
+          },
+          {
+            "name": "dataInicio",
+            "in": "formData",
+            "description": "Data de inicio do momento",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "dataFim",
+            "in": "formData",
+            "description": "Data de fim do momento",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "descricao",
+            "in": "formData",
+            "description": "Descrição do momento",
+            "type": "string"
+          },
+          {
+            "name": "narrativa",
+            "in": "formData",
+            "description": "Narrativa do momento",
+            "type": "string"
+          },
+          {
+            "name": "ficheiros",
+            "in": "formData",
+            "description": "imagem associada ao momento",
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso ao gravar dados",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/momentos/viagem/{idViagem}": {
+      "get": {
+        "tags": [
+          "Momentos"
+        ],
+        "summary": "Obtem todos um momento",
+        "parameters": [
+          {
+            "name": "idViagem",
+            "in": "path",
+            "description": "ID Viagem",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/momentos/{id}": {
+      "get": {
+        "tags": [
+          "Momentos"
+        ],
+        "summary": "Obter um momento",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID momento",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Momentos"
+        ],
+        "summary": "Atualiza um momento existente",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID momento",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pais",
+            "in": "formData",
+            "description": "Pais de destino",
+            "type": "string"
+          },
+          {
+            "name": "cidade",
+            "in": "formData",
+            "description": "Cidade de destino",
+            "type": "string"
+          },
+          {
+            "name": "latitude",
+            "in": "formData",
+            "description": "Coordenadas de latitude",
+            "type": "string"
+          },
+          {
+            "name": "longitude",
+            "in": "formData",
+            "description": "Coordenadas de longitude",
+            "type": "string"
+          },
+          {
+            "name": "dataInicio",
+            "in": "formData",
+            "description": "Data de inicio do momento",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "dataFim",
+            "in": "formData",
+            "description": "Data de fim do momento",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "descricao",
+            "in": "formData",
+            "description": "Descrição do momento",
+            "type": "string"
+          },
+          {
+            "name": "narrativa",
+            "in": "formData",
+            "description": "Narrativa do momento",
+            "type": "string"
+          },
+          {
+            "name": "ficheiros",
+            "in": "formData",
+            "description": "imagem associada ao momento",
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso ao gravar dados",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Momentos"
+        ],
+        "summary": "Remove um momento por id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID momento",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Momento removida com sucesso",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/momentos/ficheiros/{id}": {
+      "get": {
+        "tags": [
+          "Momentos"
+        ],
+        "summary": "Obtem um ficheiro relacionado com as momento",
+        "description": "Obtem a imagem associada a uma momento, caso não exista obtem uma imagem por omissão da API",
+        "produces": [
+          "image/png",
+          "image/gif",
+          "image/jpeg"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da momento",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Imagem obtida"
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/momentos/cidade/{cidade}": {
+      "get": {
+        "tags": [
+          "Momentos"
+        ],
+        "summary": "Filtra todas as momentos por cidade",
+        "parameters": [
+          {
+            "name": "cidade",
+            "in": "path",
+            "description": "Nome da cidade",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Viages obtidas com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Response": {
+      "type": "object",
+      "properties": {
+        "ErroCorde": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "Error": {
+          "type": "object"
+        },
+        "Data": {
+          "type": "object"
+        }
+      }
+    },
+    "Viagem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "descricao": {
+          "type": "string"
+        },
+        "dataInicio": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dataFim": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "pais": {
+          "type": "string"
+        },
+        "cidade": {
+          "type": "string"
+        },
+        "coordenadas": {
+          "type": "array"
+        },
+        "sumClass1": {
+          "type": "integer"
+        },
+        "sumClass2": {
+          "type": "integer"
+        },
+        "sumClass3": {
+          "type": "integer"
+        }
+      }
+    },
+    "Momento": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "idViagem": {
+          "type": "integer"
+        },
+        "designacao": {
+          "type": "string"
+        },
+        "narrativa": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "cidade": {
+          "type": "string"
+        },
+        "coordenadas": {
+          "type": "array"
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "Class1": {
+          "type": "integer"
+        },
+        "Class2": {
+          "type": "integer"
+        },
+        "Class3": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

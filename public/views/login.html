@@ -1,0 +1,56 @@
+
+<link href="../stylesheets/login.css" rel="stylesheet" type="text/css" />
+<script src="../scripts/login.js"></script>    
+<div class="row" style="background-image: url(../img/trip.jpg); max-height: 100%; max-width: 100%;">
+<div class="col-md-6">
+<div class=" login">
+
+    <!-- BEGIN LOGO -->
+    <div class="logo">
+        <a>
+            <img style="width: 325px;" src="../img/tripstogether.png" alt="" /> </a>
+    </div>
+    <!-- END LOGO -->
+    <!-- BEGIN LOGIN -->
+    <div class="content">
+        <!-- BEGIN LOGIN FORM -->
+        <form name="form" class="login-form" ng-submit="login()" role="form">
+            <h3 class="form-title font-green">Log in </h3>
+            <div class="alert alert-danger display-hide">
+                <button class="close" data-close="alert"></button>
+                <span> Introduzir email e password. </span>
+            </div>
+            <div class="form-group">
+                <label for="email" class="control-label visible-ie8 visible-ie9">Email</label>
+                <input class="form-control form-control-solid placeholder-no-fix" type="text" 
+                       id="email" autocomplete="off" placeholder="Email" ng-model="email" required /> </div>
+            <div class="form-group">
+                <label for="password" class="control-label visible-ie8 visible-ie9">Password</label>
+                <input class="form-control form-control-solid placeholder-no-fix" type="password" 
+                       id="password" autocomplete="off" placeholder="Password" ng-model="password" required /> </div>
+            <div class="form-actions">
+                <button type="submit" class="btn green uppercase">Login</button>
+            </div>
+        
+            <div class="login-options">
+                <h4>login com</h4>
+                
+                <ul class="social-icons">
+                    <a ng-click="loginFacebook();">
+                        <img style="width: 40px" class="img-circle social-icon-color" src="../img/facebook.png">
+                    </a>
+                </ul>
+            </div>
+            <div class="create-account">
+                <p>
+                    <a href="#!/register" id="register-btn" class="uppercase">Criar uma conta</a>
+                </p>
+            </div>
+        </form>
+        <!-- END LOGIN FORM -->
+    </div>
+</div>
+</div>
+
+
+</div>

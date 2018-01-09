@@ -1,0 +1,100 @@
+
+<script src="../scripts/search.js" type="text/javascript"></script>
+<link href="../stylesheets/search.css" rel="stylesheet" type="text/css" />
+        
+<h1 class="page-title"> Pesquisa
+</h1>
+
+<div class="search-page search-content-1">
+    <div class="search-bar ">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <input ng-model="pattern" type="text" class="form-control" placeholder="Procurar por...">
+                    <span class="input-group-btn">
+                        <button ng-click="procurar();" class="btn blue uppercase bold" type="button">Procurar</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div ng-show="viagens" class="col-md-7">
+            <div class="portlet light ">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-edit font-dark"></i>
+                        <span class="caption-subject font-dark bold uppercase">Viagens</span>
+                    </div>
+                </div>
+                <div class="search-container ">
+                    <ul ng-repeat="viagem in viagens">
+                        <li ng-click="openViagem(viagem);" class="search-item clearfix">
+                            <a href="javascriptt:;">
+                                <img src="{{ viagem.ficheiros.nome }}" />
+                            </a>
+                            <div class="search-content">
+                                <h2 class="search-title">
+                                    <a href="javascript:;">{{viagem.pais}}</a>
+                                </h2>
+                                <p class="search-desc"> {{viagem.descricao}} </p>
+                            </div>
+                        </li>                    
+                    </ul>                
+                </div>
+            </div>
+        </div>
+        <div ng-show="pessoas" class="col-md-5">
+            <!-- BEGIN PORTLET-->
+            <div class="portlet light ">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-edit font-dark"></i>
+                        <span class="caption-subject font-dark bold uppercase">Pessoas</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="mt-element-card mt-card-round mt-element-overlay">
+                        <div class="row">
+                            <div ng-repeat="pessoa in pessoas" class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <div class="mt-card-item">
+                                    <div class="mt-card-avatar mt-overlay-1">
+                                        <img src="{{pessoa.foto}}" />
+                                        <div class="mt-overlay">
+                                            <ul class="mt-info">
+                                                <li>
+                                                    <a class="btn default btn-outline" href="#!/profile?id={{pessoa.id}}">
+                                                        <i class="icon-magnifier"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="mt-card-content">
+                                        <h2 class="mt-card-name">{{pessoa.nome}}</h2>                                                      
+                                    </div>
+                                </div>
+                            </div>                                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PORTLET-->
+        </div>
+    </div>
+    <div ng-show="viagens"  class="row">
+        <div class="col-md-12">
+            <div class="portlet light ">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-edit font-dark"></i>
+                        <span class="caption-subject font-dark bold uppercase">Localização</span>
+                    </div>
+                </div>
+                <div class="search-container ">
+                    <div id="gmap_geocoding" class="gmaps"> </div>            
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
