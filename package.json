@@ -1,6 +1,6 @@
 {
   "name": "trips-together",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -33,8 +33,17 @@
     "weather-js": "^2.0.0",
     "where": "^0.1.3"
   },
-  "devDependencies": {},  
+  "devDependencies": {},
   "author": "",
-  "license": "ISC",  
+  "license": "ISC",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrefvc/tpas.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andrefvc/tpas/issues"
+  },
+  "homepage": "https://github.com/andrefvc/tpas#readme",
   "description": ""
 }
