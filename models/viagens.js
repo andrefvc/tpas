@@ -45,6 +45,10 @@ var viagemSchema = Schema({
     buckelists : [{ type: mongoose.Schema.Types.ObjectId, ref: 'BucketLists' }],
     comentarios : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comentario' }],
     _user : { type: String, ref: 'Utilizador' },
+    aprovadoEm: Date,
+    aprovadoPor: String,
+    aprovado:{type:Boolean, default:0} ,
+
 }, 
 { 
   collection: 'Viagens' 

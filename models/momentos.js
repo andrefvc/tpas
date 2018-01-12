@@ -42,6 +42,7 @@ var momentoSchema = Schema({
     class1: Number,
     class2: Number,
     class3: Number,
+    _user : { type: String, ref: 'Utilizador' },
     sumComentarios: {
       type: Number,
       default: 0

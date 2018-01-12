@@ -9,6 +9,7 @@ var UserSchema = new mongoose.Schema({
     unique: true,
     unique: 'Item cannot share the same ID'
   },
+ 
   nome: {
     type: String,
     required: true,
@@ -35,6 +36,10 @@ var UserSchema = new mongoose.Schema({
   creditos :{
     type: Number,
     default: 0
+  },
+   perfil:{
+    type: Number,
+     required: true
   },
   comentarios :  [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comentario' }],
   notificacoes : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Notificacao' }],
