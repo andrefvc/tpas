@@ -7,13 +7,13 @@ var responseJSON = function(message=''){
   if(message == '')
     message = 'Ok';
 
+
   this.ErrorCode = 200;
   this.Error = { };
   this.Message = message;
   this.Data = { };
 }
 exports.responseJSON = responseJSON;
-
 var sheckFile = function(path, id){
    var exists = false;
    try {
