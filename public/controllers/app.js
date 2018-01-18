@@ -27,6 +27,10 @@ app.config(['$routeProvider','$httpProvider', function ($routeProvider, $httpPro
             templateUrl : "views/viagens.html",      
             controller: 'viagensCtrl'
         })
+        .when('/gestao', {
+            templateUrl : "views/gestao.html",      
+            controller: 'gestaoCtrl'
+        })
         .when('/publicViagens', {
             controller: 'viagensCtrl',
             templateUrl: 'views/viagens.html',            

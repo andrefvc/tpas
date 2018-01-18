@@ -51,6 +51,7 @@ app.get('/:nome', function (req, res, next) {
     app.post("/api/v2/registo", function(req, res) {
       var newUser = {};
       newUser.nome = req.body.nome;
+      newUser.perfil = req.body.perfil;
       newUser.email = req.body.email;
       newUser.foto = req.body.foto;
       newUser.password = req.body.password;
