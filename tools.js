@@ -197,7 +197,7 @@ var isAuthenticated = function(req, res, next){
             return res.status(401).jsonp(err);
         }
     }
-    
+
     var authenticator = req._passport.instance.authenticate ('id');
     authenticator (req, res, function(err, user){
         if (err) {

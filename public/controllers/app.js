@@ -109,8 +109,16 @@ app.run(['$rootScope', '$location', '$cookieStore', '$http', 'AuthenticationServ
             $rootScope.currentUser = $rootScope.globals.currentUser.user;
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
+
             // redirect to login page if not logged in
-            if ($location.path() !== '/search' && $location.path() !== '/publicViagens' && $location.path() !== '/login' && $location.path() !== '/register' && !$rootScope.globals.currentUser) {                
+            //able routes without credentials
+            if (!$rootScope.globals.currentUser && 
+                $location.path() !== '/search' && 
+                $location.path() !== '/publicViagens' &&
+                $location.path() !== '/login' &&
+                $location.path() !== '/register' &&
+                $location.path() !== '/dashboard') 
+            {                
                 $location.path('/login');
                 return;
             }
