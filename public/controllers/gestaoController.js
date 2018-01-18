@@ -1,8 +1,8 @@
 app.controller("gestaoCtrl", function($q, $scope, $http, $rootScope, $timeout, $location) {
 
-    $scope.viagens = [];
+    $scope.viagensLst = [];
 
-    $scope.getViagens = function() {
+    $scope.getViagensAll = function() {
 
         App.blockUI({ boxed: true });
         $http({ 

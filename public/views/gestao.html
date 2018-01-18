@@ -1,7 +1,7 @@
-<div ng-include="'views/gestao.html'" id="responsive" class="modal fade" tabindex="-1" data-width="660"></div>
+<!-- <div ng-include="'views/gestao.html'" id="responsive" class="modal fade" tabindex="-1" data-width="660"></div> -->
 
 
-<div ng-init="getViagens();" ng-show="currentUser" class="portlet-body">
+<div ng-init="getViagensAll();" ng-show="currentUser" class="portlet-body">
     <div class="row">
         <div  class="form-group">
             <div class="col-md-12">
@@ -25,64 +25,71 @@
 <div class="blog-page blog-content-1">
     <div class="row">
 
-        <div> 
-            <table class="table table-striped">
+    
+    <table class="table table-striped">
+                   
+            <thead> 
                 <tr>
                     <th>
                         <td style="width:30%">
                             Viagem
                         </td>
-                        <td style="width:30%">
+                        <td style="width:30%" >
                             Utilizador
                         </td>
                         <td style="width:30%">
                             Pública
                         </td>
-                        <td style="width:10%">
+                        <td style="width:30%">
                             Acções
                         </td>
                     </th>
             
                 </tr>
-               
-               <!-- <div class="animate-repeat" ng-repeat="viagem in viagens | orderBy : '-dataInsercao'"> -->
+            </thead>
+            <tbody>   
                     <tr ng-repeat="viagem in viagens">
-                        <td style="width:25%">
-                            <span> {{viagem.descricao}}</span>   
+                        <td></td>
+                        <div class="col-md-3">
+                        <td>
+                            {{viagem.descricao}}
                         </td>
-                        <td style="width:25%">
-                            <span> {{viagem._user}}</span>   
+                    </div>
+                        <div class="col-md-3">  <td >
+                            {{viagem._user.nome}}  
                         </td>
-                        <td style="width:25%">
-                            <span> {{viagem.partilhado}}</span>  
+                    </div>
+                        <div class="col-md-3"> 
+                             <td>
+                             {{viagem.partilhado}}
                         </td>
-                        <td style="width:25%">
-                            <div class="col-md-12">
+                    </div>
+                    <div class="col-md-3"> 
+                        <td>
+                          
                                 <div class="col-md-4">
-                                     <div ng-show="isOwner(viagem.idUtilizador);" ng-click="(viagem);" style="cursor:pointer" title="Info" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
-                                         <i class="fa fa-trash-o"></i><!--info-->
+                                     <div   style="cursor:pointer" title="Info" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
+                                         <i class="fa fa-info"></i><!--info-->
                                       </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div ng-show="isOwner(viagem.idUtilizador);" ng-click="(viagem);" style="cursor:pointer" title="Aprovar" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
-                                         <i class="fa fa-trash-o"></i> <!--check-->
+                                    <div   style="cursor:pointer" title="Aprovar" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
+                                         <i class="fa fa-check"></i> <!--check-->
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div ng-show="isOwner(viagem.idUtilizador);" ng-click="(viagem);" style="cursor:pointer" title="Remover" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
+                                    <div   style="cursor:pointer" title="Remover" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
                                          <i class="fa fa-trash-o"></i>
                                     </div>
                                 </div>                               
-                            </div>
+                            
                         </td>
+                    </div>
                     </tr>
-               <!--  </div> -->
+            </tbody>     
+    </table>
 
-
-
-            </table>
-
-        </div>
+      
     
 
   </div>
