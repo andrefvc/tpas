@@ -39,6 +39,10 @@ app.config(['$routeProvider','$httpProvider', function ($routeProvider, $httpPro
             templateUrl : "views/home.html",
             controller: 'homeCtrl'
         })
+        .when('/dashboard', {
+            controller: 'dashboardController',
+            templateUrl: 'views/dashboard.html'
+        })
         .otherwise({ redirectTo: '/login' });
 
     $httpProvider.interceptors.push(['$q', '$location', '$rootScope', '$cookieStore',

@@ -17,7 +17,7 @@ router.get('/utilizador/:id', tools.isAuthenticated, function(req, res, next) {
     });
 });
 
-router.get('/viagem/:id', tools.isAuthenticated, function(req, res, next) {
+router.get('/viagem/:id', function(req, res, next) {
     comentariosCtrl.find({ idViagem: req.params.id }, {}, function(err, result) {
         if(err)
             return res.status(400).jsonp(tools.parseError(err));        

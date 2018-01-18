@@ -181,6 +181,12 @@ var isAuthenticated = function(req, res, next){
 
     var authdata = auth(req);
 
+    if (authdata){
+        req.body.email_user= authdata.name;
+        req.body.id_user = authdata.pass;
+    }
+    
+
     if (authdata && req._passport.session){
         if (req._passport.session.user == authdata.pass) {
             return next();
@@ -191,12 +197,6 @@ var isAuthenticated = function(req, res, next){
             return res.status(401).jsonp(err);
         }
     }
-    
-    if (authdata){
-        req.body.email_user= authdata.name;
-        req.body.id_user = authdata.pass;
-    }
-    
     
     var authenticator = req._passport.instance.authenticate ('id');
     authenticator (req, res, function(err, user){

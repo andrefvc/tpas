@@ -5,10 +5,8 @@ var path = require('path');
 var tools = require(path.join(__dirname, '/../../../tools'));
 var viagensCtrl = require(path.join(__dirname, '/../../../controllers/viagens.js'));
 
-router.get('/', tools.isAuthenticated,  function(req, res, next) {
+router.get('/',   function(req, res, next) {
     var query = {};
-
-    var user = req.user[0] || req.user;
 
     if (req.query.query) {
 
@@ -18,31 +16,36 @@ router.get('/', tools.isAuthenticated,  function(req, res, next) {
             }
         }
         else {
-            //tools.isAuthenticated(req, res, function(){
+            if (req.user == undefined){
+                var err = tools.parseError(new Error("Utilizador não autenticado!"));
+                err.ErrorCode = 401;
+                return res.status(401).jsonp(err);
+            }
+            
+            var user = req.user[0] || req.user;
 
-                if (req.query.query == 'minhas'){
-                    query = { idUtilizador: user.id };
-                }
-                else if (req.query.query == 'partilhadas'){
-                    query = { 
-                        $and : [
+            if (req.query.query == 'minhas'){
+                query = { idUtilizador: user.id };
+            }
+            else if (req.query.query == 'partilhadas'){
+                query = { 
+                    $and : [
+                        { partilhado: true },
+                        { idUtilizador: { "$ne": user.id } }
+                    ]
+                };
+            }
+            else if (req.query.query == 'todas'){
+                query = { 
+                    $or : [
+                        { $and : [
                             { partilhado: true },
                             { idUtilizador: { "$ne": user.id } }
-                        ]
-                    };
+                        ] },
+                        { idUtilizador: user.id }
+                    ]
                 }
-                else if (req.query.query == 'todas'){
-                    query = { 
-                        $or : [
-                            { $and : [
-                                { partilhado: true },
-                                { idUtilizador: { "$ne": user.id } }
-                            ] },
-                            { idUtilizador: user.id }
-                        ]
-                    }
-                }    
-            //});        
+            }       
         }
     }
     else if (req.query.filtro){
