@@ -63,6 +63,7 @@ app.controller('LoginController',
             var user = {
                 nome: $scope.nome,
                 email: $scope.email,
+                perfil: $scope.perfil,
                 password: $scope.password,
                 foto: $rootScope.foto,
                 facebook: ($rootScope.newUser != undefined) ? $rootScope.newUser.facebook : undefined

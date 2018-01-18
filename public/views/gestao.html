@@ -1,94 +1,5 @@
-<div ng-include="'views/comentarios.html'" id="responsive" class="modal fade" tabindex="-1" data-width="660"></div>
+<div ng-include="'views/gestao.html'" id="responsive" class="modal fade" tabindex="-1" data-width="660"></div>
 
-<div id="modalAddViagem" class="modal fade" tabindex="-1" data-width="760">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h4 class="modal-title">Adicionar Viagem</h4>
-    </div>
-    <div class="modal-body">
-
-        <div class="row">
-            <div class="col-md-12">
-                <form action="#" class="form-horizontal form-bordered">
-                    <div class="form form-body">                        
-                        <div class="form-group">
-                            <label class="control-label col-md-2">Período</label>
-                            <div class="col-md-8">
-                                <div class="input-group input-medium date-picker input-daterange" data-date-format="dd-mm-yyyy">
-                                    <input ng-readonly="true" ng-model="dataInicio" type="text" class="form-control" name="from">
-                                    <span class="input-group-addon"> to </span>
-                                    <input ng-readonly="true" ng-model="dataFim" type="text" class="form-control" name="to"> </div>
-                                <!-- /input-group -->
-                            </div>
-                            <div class="col-md-2">
-                                <div class="pull-right">
-                                    <input type="checkbox" class="make-switch" data-on-text="&nbsp;Publica&nbsp;" data-off-text="&nbsp;Privada&nbsp;">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <textarea ng-model="descricao" class="form-control todo-taskbody-taskdesc" rows="9" placeholder="Descrição..."></textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group ">
-                            <div class="col-md-4">
-                                <div class="fileinput fileinput-new" data-provides="fileinput">
-                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"> </div>
-                                    <div>
-                                        <span class="btn red btn-outline btn-file">
-                                            <span class="fileinput-new"> Escolher imagem </span>
-                                            <span class="fileinput-exists"> Alterar </span>
-                                            <input ng-file="image" type="file" name="file" accept="image/x-png,image/gif,image/jpeg" > </span>
-                                        <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Remover </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>   
-
-                        <div class="form-group ">
-                            <div class="col-md-12">
-                                <div class="row" style="padding-top: 5px; background-color: #eee" > 
-                                    <figure class="icons">
-                                        <div ng-repeat="temp in temperatura | limitTo: 6" class="col-md-2" style="text-align: center;">
-                                            <canvas class="{{temp.icon}}" width="40" height="40">
-                                            </canvas>
-                                        </div>
-                                    </figure>
-                                </div>
-                                <div class="row" style="margin-bottom: 10px; padding-top: 5px; background-color: #eee">
-                                    <div ng-repeat="temp in temperatura | limitTo: 6" class="col-md-2" style="text-align: center;">
-                                        <span class="itemWeather">{{temp.temperatureMin}}ºC - {{temp.temperatureMax}}ºC</span><br>
-                                        <span class="summaryWeather">{{temp.summary}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group ">
-                            <div class="col-md-12">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="gmap_geocoding_address" placeholder="Pesquisa...">
-                                        <span class="input-group-btn">
-                                            <button class="btn blue" id="gmap_geocoding_btn">
-                                                <i class="fa fa-search"></i>
-                                        </span>
-                                    </div>
-                                <div id="gmap_geocoding" class="gmaps"> </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button ng-click="insertViagem();" type="button" data-dismiss="modal" class="btn btn-outline green" >Gravar <i class="fa fa-save"></i></button>
-        <button type="button" data-dismiss="modal" class="btn btn-outline dark">Fechar <i class="fa fa-remove"></i></button>
-    </div>
-</div>
 
 <div ng-init="getViagens();" ng-show="currentUser" class="portlet-body">
     <div class="row">
@@ -115,45 +26,46 @@
     <div class="row">
 
         <div> 
-            <table>
+            <table class="table table-striped">
                 <tr>
                     <th>
-                        <td>
+                        <td style="width:30%">
                             Viagem
                         </td>
-                        <td>
+                        <td style="width:30%">
                             Utilizador
                         </td>
-                        <td>
+                        <td style="width:30%">
                             Pública
                         </td>
-                        <td>
+                        <td style="width:10%">
                             Acções
                         </td>
                     </th>
             
                 </tr>
-                <div class="animate-repeat" ng-repeat="viagem in viagens | orderBy : '-dataInsercao'">
-                    <tr>
-                        <td>
-                             {{ viagem.descricao }}
+               
+               <!-- <div class="animate-repeat" ng-repeat="viagem in viagens | orderBy : '-dataInsercao'"> -->
+                    <tr ng-repeat="viagem in viagens">
+                        <td style="width:25%">
+                            <span> {{viagem.descricao}}</span>   
                         </td>
-                         <td>
-                              {{ viagem._user }}
+                        <td style="width:25%">
+                            <span> {{viagem._user}}</span>   
                         </td>
-                         <td>
-                             {{ viagem.partilhado }}
+                        <td style="width:25%">
+                            <span> {{viagem.partilhado}}</span>  
                         </td>
-                         <td>
+                        <td style="width:25%">
                             <div class="col-md-12">
                                 <div class="col-md-4">
                                      <div ng-show="isOwner(viagem.idUtilizador);" ng-click="(viagem);" style="cursor:pointer" title="Info" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
-                                         <i class="info"></i>
+                                         <i class="fa fa-trash-o"></i><!--info-->
                                       </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div ng-show="isOwner(viagem.idUtilizador);" ng-click="(viagem);" style="cursor:pointer" title="Aprovar" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
-                                         <i class="check"></i>
+                                         <i class="fa fa-trash-o"></i> <!--check-->
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -164,7 +76,7 @@
                             </div>
                         </td>
                     </tr>
-                 </div>
+               <!--  </div> -->
 
 
 
