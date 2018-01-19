@@ -48,7 +48,10 @@ var viagemSchema = Schema({
     aprovadoEm: Date,
     aprovadoPor: String,
     aprovado:{type:Boolean} ,
-
+    visualizacoes: {
+      type: Number,
+      default:0
+    }
 }, 
 { 
   collection: 'Viagens' 
