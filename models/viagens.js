@@ -47,7 +47,7 @@ var viagemSchema = Schema({
     _user : { type: String, ref: 'Utilizador' },
     aprovadoEm: Date,
     aprovadoPor: String,
-    aprovado:{type:Boolean, default:0} ,
+    aprovado:{type:Boolean} ,
 
 }, 
 { 

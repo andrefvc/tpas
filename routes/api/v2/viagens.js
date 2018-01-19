@@ -97,6 +97,12 @@ router.put('/:id', tools.isAuthenticated, function(req, res, next) {
 
     var viagem = { };
 
+    if (req.body.aprovado)
+    viagem.aprovado = req.body.aprovado;
+    if (req.body.aprovadoPor)
+    viagem.aprovadoPor = req.body.aprovadoPor;
+    if (req.body.aprovadoEm)
+        viagem.aprovadoEm = req.body.aprovadoEm;
     if (req.body.popular)
         viagem.popular = req.body.popular;
     if (req.body.partilhado)
@@ -161,7 +167,10 @@ router.post('/', tools.isAuthenticated, function (req, res) {
             "_user": user._id,
             "sumClass1": 0,
             "sumClass2": 0,
-            "sumClass3": 0
+            "sumClass3": 0,
+            "aprovadoEm":req.body.aprovadoEm,
+            "aprovadoPor":req.body.aprovadoPor,
+            "aprovado":req.body.aprovado
         };
 
         viagensCtrl.insert(viagem, function(err, result) {

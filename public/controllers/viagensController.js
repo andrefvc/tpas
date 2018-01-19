@@ -199,7 +199,10 @@ app.controller("viagensCtrl", function($q, $scope, $http, $rootScope, $timeout, 
             dataInicio: new Date( $scope.dataInicio.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3") ),
             dataFim: new Date( $scope.dataFim.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3") ),
             descricao: $scope.descricao,
-            ficheiros: $scope.image[0]
+            ficheiros: $scope.image[0],
+            aprovadoEm: new Date(),
+            aprovadoPor: "",
+            aprovado: 0
         }        
 
         App.blockUI({ boxed: true });

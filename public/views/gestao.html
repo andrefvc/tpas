@@ -1,6 +1,61 @@
 <!-- <div ng-include="'views/gestao.html'" id="responsive" class="modal fade" tabindex="-1" data-width="660"></div> -->
 
 
+
+
+
+<div id="modalViagem" class="modal fade" tabindex="-1" data-width="1024">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">Detalhes Viagem</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group ">
+                <div class="col-md-2">
+                        <span class="input-group-addon"> Utilizador</span>
+                </div>
+            <div class="col-md-2">
+                    <input ng-readonly="true" ng-model="_user" type="text" class="form-control" name="nome"> 
+            </div>
+           
+            <div class="col-md-8">
+                    <div class="input-group input-medium date-picker input-daterange" data-date-format="dd-mm-yyyy">
+                        <input ng-readonly="true" ng-model="dataInicio" type="text" class="form-control" name="from">
+                        <span class="input-group-addon"> to </span>
+                        <input ng-readonly="true" ng-model="dataFim" type="text" class="form-control" name="to"> 
+                    </div>
+                    <!-- /input-group -->
+            </div>
+        </div>
+        <div class="form-group ">
+                <div class="col-md-12">
+                        <span class="input-group-addon"> Descricção </span>
+                        <input ng-readonly="true" ng-model="descricao" type="text" class="form-control" name="Descricao"> </div>
+                </div>
+        </div>
+
+        <div class="form-group ">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                        <span class="input-group-addon"> pais</span>
+                        <input ng-readonly="true" ng-model="pais" type="text" class="form-control" name="pais"> 
+                </div>
+                
+                <div class="col-md-6">
+                        <span class="input-group-addon"> cidade</span>
+                        <input ng-readonly="true" ng-model="cidade" type="text" class="form-control" name="cidade"> 
+                </div>
+                
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+
+
 <div ng-init="getViagensAll();" ng-show="currentUser" class="portlet-body">
     <div class="row">
         <div  class="form-group">
@@ -25,7 +80,7 @@
 <div class="blog-page blog-content-1">
     <div class="row">
 
-    
+        <div simple-grid="GridGestao"></div>
     <table class="table table-striped">
                    
             <thead> 
@@ -68,12 +123,12 @@
                         <td>
                           
                                 <div class="col-md-4">
-                                     <div   style="cursor:pointer" title="Info" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
+                                     <div   style="cursor:pointer" ng-click="openModalViagem(viagem)" title="Info" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
                                          <i class="fa fa-info"></i><!--info-->
                                       </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div   style="cursor:pointer" title="Aprovar" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
+                                    <div   style="cursor:pointer" title="Aprovar" ng-click="aprovarViagem(viagem)" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
                                          <i class="fa fa-check"></i> <!--check-->
                                     </div>
                                 </div>
