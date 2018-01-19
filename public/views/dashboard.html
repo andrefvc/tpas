@@ -1,20 +1,39 @@
 
 
 
-    <div  class="row">
-
-            <table my-table="overrideOptions"
-            aa-data="sampleProductCategories"
-        ao-column-defs="columnDefs"
-        fn-row-callback="myCallback"
-            >
+    <div ng-init="getViagens();" class="row" >
+        <table id="example" class="display projects-table table table-striped table-bordered table-hover">
             <thead>
-            <tr>
-                <th style="width:150px">Category</th>
-                <th style="width:250px">Name</th>
-                <th style="width:100px">Price</th>
-
-            </tr>
+                <tr>
+                     
+                    <th><i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i> Data</th>
+                    <th><i class="fa fa-fw fa-globe text-muted hidden-md hidden-sm hidden-xs"></i> Localização</th>
+                    <th></th>
+                    <th>Alcance</th>                    
+                    <th>Interação</th>                                        
+                    <th><i class="fa fa-share-alt fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Publico-alvo</th>
+                    <th><i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i> Estado</th>
+                    <th>Tracker</th>
+                </tr>
             </thead>
-        </table>
+            <tbody>
+                    <tr ng-repeat="viagem in viagens">
+                            <td> {{ viagem.dataInicio | date : format : timezone}} </td>
+                            <td> {{ viagem.pais}} - {{viagem.cidade}} </td>
+                            <td>
+                                <div class='project-members'><a href='javascript:void(0)'>
+                                    <a href='javascript:void(0)'><img src='{{ viagem.ficheiros.nome }}' class='away'></a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class='progress progress-xs' data-progressbar-value='100'><div class='progress-bar'></div></div>
+                                <div class='progress progress-xs' data-progressbar-value='30'><div class='progress-bar'></div></div>
+                            </td>
+                            
+                            <td></td>
+                            <td title="{{viagem.aprovado ? 'Partilhada com: Público' : 'Partilhada com: Apenas eu'}}"><i class="fa fa-circle font-xs"  ng-class="viagem.partilhado ? 'txt-color-greenLight' : 'text-default'"></i></td>
+                            <td><span class='label' ng-class="viagem.aprovado ? 'label-success' : 'label-default'">{{viagem.aprovado ? 'Aprovada' : 'Rejeitada'}}</span></td>
+                        </tr>
+            </tbody>
+        </table>          
 </div>
