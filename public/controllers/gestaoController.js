@@ -58,13 +58,7 @@ app.controller("gestaoCtrl", function($q, $scope, $http, $rootScope, $timeout, $
 
         $scope.getViagemById(viagem); 
 
-        $scope.dataInicio =  $scope.viagem.dataInicio;
-        $scope.dataFim =   $scope.viagem.dataFim;
-        $scope.descricao =  $scope.viagem.descricao;
-        $scope.pais =  $scope.viagem.pais;
-        $scope.cidade =  $scope.viagem.cidade;
-        $scope._user =  $scope.viagem._user.nome;
-        $scope.image = [];
+       
 
     }
 
@@ -76,7 +70,13 @@ app.controller("gestaoCtrl", function($q, $scope, $http, $rootScope, $timeout, $
             url: '/api/v2/viagens/' + viagem.id,
         }).then(function (response) {            
             $scope.viagem = response.data.Data; 
-
+            $scope.dataInicio =  $scope.viagem.dataInicio;
+            $scope.dataFim =   $scope.viagem.dataFim;
+            $scope.descricao =  $scope.viagem.descricao;
+            $scope.pais =  $scope.viagem.pais;
+            $scope.cidade =  $scope.viagem.cidade;
+            $scope._user =  $scope.viagem._user.nome;
+            $scope.image = [];
             App.unblockUI();
         
         });   
