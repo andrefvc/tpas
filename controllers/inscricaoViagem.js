@@ -1,8 +1,8 @@
 var db = require('../models/database.js');
-var model = db.inscricaoViagem;
+var model = db.InscricaoViagem;
 
 function insert(data, callback) {
-    var item = new model(data);
+   var item = new model(data);
     item.save(function(err, obj) {
         callback(err, obj);
     });

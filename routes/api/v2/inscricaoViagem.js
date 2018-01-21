@@ -38,7 +38,8 @@ router.post('/', tools.isAuthenticated, function (req, res) {
             }
         });  
 });
- //alterar
+ 
+ 
 router.delete('/viagem/:idViagem/utilizador/:idUtilizador', tools.isAuthenticated, function(req, res, next) {    
     incricaoViagemCtrl.find({idViagem:req.params.idViagem,idUtilizador:req.params.idUtilizador}, function(err, viagem){
         if (err)
@@ -54,3 +55,6 @@ router.delete('/viagem/:idViagem/utilizador/:idUtilizador', tools.isAuthenticate
         });    
     });
 });
+
+
+module.exports = router;

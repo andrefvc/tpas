@@ -17,10 +17,19 @@ var inscricaoViagemSchema = Schema({
     }
 }, 
 { 
-  collection: 'inscricaoViagem' 
+  collection: 'InscricaoViagem' 
+});
+
+inscricaoViagemSchema.pre('save', function (next) { 
+  var inscricaoViagem = this;
+    
+  if (this.isNew)
+    this.id = uuidV4();
+
+  return next();
 });
 
 
 
-var inscricaoViagem = mongoose.model('inscricaoViagem', inscricaoViagemSchema);
-exports.inscricaoViagem = inscricaoViagem;
+var InscricaoViagem = mongoose.model('InscricaoViagem', inscricaoViagemSchema);
+exports.InscricaoViagem = InscricaoViagem;

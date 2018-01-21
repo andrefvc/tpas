@@ -153,6 +153,40 @@ app.controller("viagensCtrl", function($q, $scope, $http, $rootScope, $timeout, 
             });           
     };
 
+    $scope.increveViagem= function(viagem){
+
+        var inscricao = {  
+            idViagem:viagem.id,
+            idUtilizador:$rootScope.currentUser.id
+          };
+
+        App.blockUI({ boxed: true });
+         $http({ 
+            method: 'POST',
+            url: '/api/v2/inscricaoViagem',
+            data: inscricao,
+            headers: {'Content-Type': undefined},
+            transformRequest: function (data, headersGetter) {
+                var formData = new FormData();
+                
+                angular.forEach(data, function (value, key) {
+                    formData.append(key, value);
+                });
+
+                var headers = headersGetter();
+                delete headers['Content-Type'];
+
+                return formData;
+            }
+        }).then(function (response) {
+            $scope.partilhado = {'background-color': '#F1C40F;'}
+
+        });
+
+    }
+
+
+
     $scope.openModalViagem = function(){
         $('#modalAddViagem').modal({ show: 'true' }); 
         App.init();

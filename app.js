@@ -31,6 +31,7 @@ var comentarios = require('./routes/api/v2/comentarios');
 var utilizadores = require('./routes/api/v2/utilizadores');
 var bucketlist = require('./routes/api/v2/bucketlist');
 var notificacoes = require('./routes/api/v2/notificacoes');
+var inscricaoViagem = require('./routes/api/v2/inscricaoViagem');
 
 //Express
 var app = express();
@@ -89,6 +90,7 @@ app.use('/api/v2/comentarios', comentarios);
 app.use('/api/v2/utilizadores', utilizadores);
 app.use('/api/v2/bucketlist', bucketlist);
 app.use('/api/v2/notificacoes', notificacoes);
+app.use('/api/v2/inscricaoViagem', inscricaoViagem);
 
 // routes auth ======================================================================
 require('./routes/api/v2/auth.js')(app, passport); // load our routes and pass in our app and fully configured passport

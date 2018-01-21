@@ -44,3 +44,4 @@ module.exports.Classificacao = require("./classificacao").Classificacao;
 module.exports.Comentario = require("./comentario").Comentario;
 module.exports.BucketList = require("./bucketlist").BucketList;
 module.exports.Notificacao = require("./notificacao").Notificacao;
+module.exports.InscricaoViagem = require("./inscricaoViagem").InscricaoViagem;
