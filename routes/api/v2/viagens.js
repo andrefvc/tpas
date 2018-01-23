@@ -45,7 +45,7 @@ router.get('/',   function(req, res, next) {
                         { idUtilizador: user.id }
                     ]
                 }
-            }       
+            }
         }
     }
     else if (req.query.filtro){
@@ -57,6 +57,8 @@ router.get('/',   function(req, res, next) {
             ]
         }
     }
+    else
+        query = req.query;
 
     viagensCtrl.find(query, { }, function(err, result) {
         if(err)
@@ -192,7 +194,5 @@ router.get('/utilizador/:perfil', tools.isAuthenticated, function(req, res, next
         return res.status(200).jsonp(tools.parseData(result)); 
     });
 });
-
-
 
 module.exports = router;

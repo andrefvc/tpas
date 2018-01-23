@@ -3,41 +3,97 @@
 
    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/smartadmin-production-plugins.min.css">
    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/smartadmin-production.min.css">
-    
-   
-   <div ng-init="getViagens();" class="row" >
+
+<div ng-init="getViagens();" class="row" >
+
+    <div class="col-lg-4">
+        <h1 class="page-title"> Visão Global</h1>
+
         <table id="example" class="display projects-table table table-striped table-bordered table-hover">
             <thead>
-                <tr>
-                     
-                    <th><i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i> Data</th>
+                <tr>                     
                     <th><i class="fa fa-fw fa-globe text-muted hidden-md hidden-sm hidden-xs"></i> Localização</th>
-                    <th></th>
-                    <th>Alcance</th>                    
-                    <th>Interação</th>                                        
-                    <th><i class="fa fa-share-alt fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Publico-alvo</th>
-                    <th><i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i> Estado</th>
-                    <th>Tracker</th>
+                    <th title="Taxa de ocupação"><i class="fa fa-fw fa-taxi text-muted hidden-md hidden-sm hidden-xs"></i> Ocupação</th>
+                    <th title="Visualizações | Comentários | Classificações"><i class="fa fa-fw fa-hand-pointer-o text-muted hidden-md hidden-sm hidden-xs"></i > VCC</th>
                 </tr>
             </thead>
             <tbody>
-                    <tr ng-repeat="viagem in viagens">
-                            <td> {{ viagem.dataInicio | date : format : timezone}} </td>
-                            <td> {{ viagem.pais}} - {{viagem.cidade}} </td>
-                            <td>
-                                <div class='project-members'><a href='javascript:void(0)'>
-                                    <a href='javascript:void(0)'><img src='{{ viagem.ficheiros.nome }}' class='away'></a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class='progress progress-xs' data-progressbar-value='100'><div class='progress-bar'></div></div>
-                                <div class='progress progress-xs' data-progressbar-value='30'><div class='progress-bar'></div></div>
-                            </td>
-                            
-                            <td></td>
-                            <td title="{{viagem.aprovado ? 'Partilhada com: Público' : 'Partilhada com: Apenas eu'}}"><i class="fa fa-circle font-xs"  ng-class="viagem.partilhado ? 'txt-color-greenLight' : 'text-default'"></i></td>
-                            <td><span class='label' ng-class="viagem.aprovado ? 'label-success' : 'label-default'">{{viagem.aprovado ? 'Aprovada' : 'Rejeitada'}}</span></td>
-                        </tr>
+                <tr ng-click="getViagensByPais(viagem.pais)" ng-repeat="viagem in viagensGruped">
+                    <td> {{ viagem.pais}}</td>
+                    <td title="Taxa de ocupação">
+                        <div class='progress progress-xs' data-progressbar-value='{{viagem.ocupacao}}'><div class='progress-bar'></div></div>
+                    </td>                            
+                    <td title="{{viagem.visualizacoes}} Visualizações | {{viagem.comentarios}} Comentários | {{viagem.classificacoes}} Classificacoes">{{viagem.visualizacoes}} | {{viagem.comentarios}} | {{viagem.classificacoes}}</td>
+                </tr>
             </tbody>
-        </table>          
+        </table>  
+    </div>
+    
+
+    <div id="detalheDiv" class="col-lg-8 hide">
+
+        <h1 class="page-title"> Visão Por país</h1>
+
+        <table id="example" class="display projects-table table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th><i class="fa fa-fw fa-globe text-muted hidden-md hidden-sm hidden-xs"></i> Data</th>
+                    <th><i class="fa fa-fw fa-globe text-muted hidden-md hidden-sm hidden-xs"></i> Localização</th>
+                    <th></th>
+                    <th title="Taxa de ocupação"><i class="fa fa-fw fa-taxi text-muted hidden-md hidden-sm hidden-xs"></i> Ocupação</th>
+                    <th title="Visualizações | Comentários | Classificações"><i class="fa fa-fw fa-hand-pointer-o text-muted hidden-md hidden-sm hidden-xs"></i > VCC</th>                    
+                        <th><i class="fa fa-share-alt fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Publico-alvo</th>
+                    <th><i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i> Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="viagem in viagens">
+                    <td> {{ viagem.data | date : format : timezone}} </td>
+                    <td> {{viagem.cidade}} </td>
+                    <td>
+                        <div class='project-members'><a href='javascript:void(0)'>
+                            <a href='javascript:void(0)'><img src='{{ viagem.imagem }}' class='away'></a>
+                        </div>
+                    </td>
+                    <td title="Taxa de ocupação">
+                        <div class='progress progress-xs' data-progressbar-value='{{viagem.ocupacao}}'><div class='progress-bar'></div></div>
+                    </td>
+                    
+                    <td title="{{viagem.visualizacoes}} Visualizações | {{viagem.comentarios}} Comentários | {{viagem.classificacoes}} Classificacoes">{{viagem.visualizacoes}} | {{viagem.comentarios}} | {{viagem.classificacoes}}</td>
+                    <td title="{{viagem.partilhado ? 'Partilhada com: Público' : 'Partilhada com: Apenas eu'}}"><i class="fa fa-circle font-xs"  ng-class="viagem.partilhado ? 'txt-color-greenLight' : 'text-default'"></i></td>
+                    <td><span class='label' ng-class="viagem.aprovado ? 'label-success' : 'label-default'">{{viagem.aprovado ? 'Aprovada' : 'Rejeitada'}}</span></td>
+                </tr>
+            </tbody>
+        </table> 
+    </div>
+
+    <div class="col-lg-4">
+        <p>
+                <h1 class="inlinesparkline">1,4,4,7,5,9,10</h1>
+                </p>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                        <div class="well well-sm well-light padding-10">
+                            <h4 class="txt-color-green">Composite <span class="semi-bold">Chart</span> <a href="javascript:void(0);" class="pull-right txt-color-green"><i class="fa fa-refresh"></i></a></h4>
+                            <br>
+                            <div class="sparkline" 
+                            data-sparkline-type="compositeline" 
+                            data-sparkline-spotradius-top="5" 
+                            data-sparkline-color-top="#3a6965" 
+                            data-sparkline-line-width-top="3" 
+                            data-sparkline-color-bottom="#2b5c59" 
+                            data-sparkline-spot-color="#2b5c59" 
+                            data-sparkline-minspot-color-top="#97bfbf" 
+                            data-sparkline-maxspot-color-top="#c2cccc" 
+                            data-sparkline-highlightline-color-top="#cce8e4" 
+                            data-sparkline-highlightspot-color-top="#9dbdb9" 
+                            data-sparkline-width="96%" 
+                            data-sparkline-height="78px" 
+                            data-sparkline-line-val="[6,4,7,8,4,3,2,2,5,6,7,4,1,5,7,9,9,8,7,6]" 
+                            data-sparkline-bar-val="[4,1,5,7,9,9,8,7,6,6,4,7,8,4,3,2,2,5,6,7]">
+                            </div> 	
+                        </div>
+                    </div>
+    </div>  
+
+    
 </div>
