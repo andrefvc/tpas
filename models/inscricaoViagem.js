@@ -14,7 +14,12 @@ var inscricaoViagemSchema = Schema({
        type: String,
         require: true,
         require: 'Falta id viagem'
+    },
+    dataInscricao :{
+      type:Date,
+      require :true
     }
+
 }, 
 { 
   collection: 'InscricaoViagem' 

@@ -157,7 +157,8 @@ app.controller("viagensCtrl", function($q, $scope, $http, $rootScope, $timeout, 
 
         var inscricao = {  
             idViagem:viagem.id,
-            idUtilizador:$rootScope.currentUser.id
+            idUtilizador:$rootScope.currentUser.id, 
+            dataInscricao: new Date()
           };
 
         App.blockUI({ boxed: true });

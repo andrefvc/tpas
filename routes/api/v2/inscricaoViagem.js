@@ -28,7 +28,8 @@ router.post('/', tools.isAuthenticated, function (req, res) {
 
         var incricaoViagem = { 
             "idUtilizador": req.body.idUtilizador,
-            "idViagem": req.body.idViagem
+            "idViagem": req.body.idViagem,
+            "dataInscricao": req.body.dataInscricao
         };
         incricaoViagemCtrl.insert(incricaoViagem, function(err, result) {
             if(!err) {
