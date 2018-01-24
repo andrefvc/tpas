@@ -39,7 +39,8 @@ var UserSchema = new mongoose.Schema({
   },
    perfil:{
     type: Number,
-     required: true
+     required: false,
+     default: 0
   },
   comentarios :  [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comentario' }],
   notificacoes : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Notificacao' }],

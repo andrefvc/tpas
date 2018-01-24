@@ -82,5 +82,22 @@ app.controller("gestaoCtrl", function($q, $scope, $http, $rootScope, $timeout, $
         });   
     }
 
+
+    $scope.removerViagem = function(viagem){
+    
+        App.blockUI({ boxed: true });
+        $http({ 
+           method: 'DELETE',
+           url: '/api/v2/viagens/' + viagem.id
+        }).then(function (response) {
+
+            toastr.success('Viagem removida!');
+
+            $scope.getViagens();
+            App.unblockUI();
+        });
+
+    
+    }
     
 });
