@@ -112,9 +112,9 @@
         Novo
 </button>
    
-                                       </p>
+</p>
 
-                 <p style="text-align: center;"> <b> MOMENTOS </b></p>                      
+<h1 class="page-title"> Momentos</h1>
 
 <div class="animate-repeat" ng-repeat="momento in momentos"> 
                     
@@ -133,8 +133,11 @@
                     
 
                     <div class="mt-timeline-icon bg-blue bg-font-blue border-grey-steel" style="left:15%">
-                        <i class="icon-plane"></i>
-                    
+                        <div class="ribbon ribbon-vertical-left" style="background-color:transparent;">
+                            <a href="#!/profile?id={{momento._user.id}}">
+                                <img style="-webkit-border-radius: 50%!important; width: 70px;" title="{{momento._user.nome}}" src="{{momento._user.foto}}" />
+                            </a>
+                        </div>   
                     </div>
                     
                     

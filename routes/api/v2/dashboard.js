@@ -5,7 +5,7 @@ var path = require('path');
 var tools = require(path.join(__dirname, '/../../../tools'));
 var dashboardCtrl = require(path.join(__dirname, '/../../../controllers/dashboard.js'));
 
-router.get('/viagens', function(req, res, next) {
+router.get('/', function(req, res, next) {
     dashboardCtrl.getViagensGroupByPais(function(err, result) {
         if(err)
             return res.status(400).jsonp(tools.parseError(err));        
@@ -15,7 +15,7 @@ router.get('/viagens', function(req, res, next) {
 });
 
 router.get('/viagens/pais/:pais', function(req, res, next) {
-        dashboardCtrl.getViagensByPais(req.params.pais, function(err, result) {
+    dashboardCtrl.getViagensByPais(req.params.pais, function(err, result) {
         if(err)
             return res.status(400).jsonp(tools.parseError(err));        
             
@@ -23,12 +23,4 @@ router.get('/viagens/pais/:pais', function(req, res, next) {
     });
 });
 
-router.get('/visitas', function(req, res, next) {
-    dashboardCtrl.getVisitas(function(err, result) {
-    if(err)
-        return res.status(400).jsonp(tools.parseError(err));        
-        
-    return res.status(200).jsonp(tools.parseData(result)); 
-});
-});
 module.exports = router;

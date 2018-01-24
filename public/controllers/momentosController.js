@@ -80,7 +80,7 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
             descricao: $scope.descricao,
             narrativa: $scope.narrativa,
             idViagem: $location.search().idViagem,
-            ficheiros: $scope.image[0]
+            ficheiros: $scope.image[0]            
         }        
 
         App.blockUI({ boxed: true });

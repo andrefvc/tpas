@@ -1,13 +1,45 @@
 
+<link rel="stylesheet" type="text/css" media="screen" href="stylesheets/smartadmin-production-plugins.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="stylesheets/smartadmin-production.min.css">
 
+<div ng-init="loadDashboard();">
 
-   <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/smartadmin-production-plugins.min.css">
-   <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/smartadmin-production.min.css">
+</div>
 
-<div ng-init="getViagens();" class="row" >
+<div class="row">
+    <div class="col-lg-6">
+        <h3 class="page-title">Visualizações da aplicação</h3>              
+        <div id="non-date-graph" class="chart no-padding" style="height: 150px !important"></div>
+    </div>        
 
+    <div class="col-lg-2" style="text-align: center;" >
+        <h3 class="page-title">Utilizadores</h3>
+    
+        <div style="width: 100%;">
+            <div style="margin-top: 57px;">
+                <span id="utilizadores" style="font-weight: 700; font-size: 200% !important" class="txt-color-green"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-2" style="text-align: center;">
+           <h3 class="page-title">Escursões</h3>
+        <div id="viagens" class="easy-pie-chart txt-color-blueLight easyPieChart" data-percent="24" data-pie-size="110">
+            <span class="percent percent-sign txt-color-blueLight font-md"></span>
+        </div>
+    </div>
+
+    <div class="col-lg-2" style="text-align: center;">
+        <h3 class="page-title">Ocupação</h3>
+        <div id="ocupacao" class="easy-pie-chart txt-color-redLight easyPieChart" data-percent="56" data-pie-size="110">
+            <span class="percent percent-sign txt-color-redLight font-md"></span>
+        </div>
+    </div>
+</div>
+
+<div class="row" >
     <div class="col-lg-4">
-        <h1 class="page-title"> Visão Global</h1>
+        <h3 class="page-title"> Visão Global</h3>
 
         <table id="example" class="display projects-table table table-striped table-bordered table-hover">
             <thead>
@@ -18,7 +50,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-click="getViagensByPais(viagem.pais)" ng-repeat="viagem in viagensGruped">
+                <tr ng-click="getViagensByPais(viagem.pais)" ng-repeat="viagem in viagensGruped" style="cursor:pointer">
                     <td> {{ viagem.pais}}</td>
                     <td title="Taxa de ocupação">
                         <div class='progress progress-xs' data-progressbar-value='{{viagem.ocupacao}}'><div class='progress-bar'></div></div>
@@ -26,13 +58,12 @@
                     <td title="{{viagem.visualizacoes}} Visualizações | {{viagem.comentarios}} Comentários | {{viagem.classificacoes}} Classificacoes">{{viagem.visualizacoes}} | {{viagem.comentarios}} | {{viagem.classificacoes}}</td>
                 </tr>
             </tbody>
-        </table>  
+        </table> 
     </div>
-    
 
     <div id="detalheDiv" class="col-lg-8 hide">
 
-        <h1 class="page-title"> Visão Por país</h1>
+        <h3 class="page-title"> Visão Por país</h3>
 
         <table id="example" class="display projects-table table table-striped table-bordered table-hover">
             <thead>
@@ -66,34 +97,4 @@
             </tbody>
         </table> 
     </div>
-
-    <div class="col-lg-4">
-        <p>
-                <h1 class="inlinesparkline">1,4,4,7,5,9,10</h1>
-                </p>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                        <div class="well well-sm well-light padding-10">
-                            <h4 class="txt-color-green">Composite <span class="semi-bold">Chart</span> <a href="javascript:void(0);" class="pull-right txt-color-green"><i class="fa fa-refresh"></i></a></h4>
-                            <br>
-                            <div class="sparkline" 
-                            data-sparkline-type="compositeline" 
-                            data-sparkline-spotradius-top="5" 
-                            data-sparkline-color-top="#3a6965" 
-                            data-sparkline-line-width-top="3" 
-                            data-sparkline-color-bottom="#2b5c59" 
-                            data-sparkline-spot-color="#2b5c59" 
-                            data-sparkline-minspot-color-top="#97bfbf" 
-                            data-sparkline-maxspot-color-top="#c2cccc" 
-                            data-sparkline-highlightline-color-top="#cce8e4" 
-                            data-sparkline-highlightspot-color-top="#9dbdb9" 
-                            data-sparkline-width="96%" 
-                            data-sparkline-height="78px" 
-                            data-sparkline-line-val="[6,4,7,8,4,3,2,2,5,6,7,4,1,5,7,9,9,8,7,6]" 
-                            data-sparkline-bar-val="[4,1,5,7,9,9,8,7,6,6,4,7,8,4,3,2,2,5,6,7]">
-                            </div> 	
-                        </div>
-                    </div>
-    </div>  
-
-    
 </div>

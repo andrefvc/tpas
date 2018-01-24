@@ -55,24 +55,29 @@ function findById(id, projection, callback) {
 }
 
 function find(conditions, projection, callback) {
+
+    var idViagem = conditions.idViagem;
+
     model.find(conditions, projection, function(err, data){
         if(err)
             return callback(err);
         
-        viagensCtrl.findById(data[0].idViagem, { visualizacoes: 1 }, function(err, viagem){
-            if(err)
-                return callback(err);
-            
-            viagem[0].visualizacoes += 1;
-            
-            viagensCtrl.update(data[0].idViagem, viagem[0], function(err, update){
+        if (idViagem) {
+            viagensCtrl.findById(idViagem, { visualizacoes: 1 }, function(err, viagem){
                 if(err)
                     return callback(err);
                 
-                callback(err, update);
+                viagem[0].visualizacoes += 1;
+                
+                viagensCtrl.update(idViagem, viagem[0], function(err, update){
+                    if(err)
+                        return callback(err);
+                    
+                    callback(err, data);
+                });
             });
-        });
-    });
+        }
+    }).populate('_user');
 }
 
 function findAll(projection, callback) {

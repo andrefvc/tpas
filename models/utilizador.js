@@ -45,6 +45,7 @@ var UserSchema = new mongoose.Schema({
   comentarios :  [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comentario' }],
   notificacoes : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Notificacao' }],
   viagens : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Viagem' }],
+  momentos : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Momento' }],
 }, { collection: 'Utilizadores' });
 
 UserSchema.plugin(beautifyUnique);

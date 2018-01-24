@@ -61,6 +61,8 @@ router.delete('/:id', tools.isAuthenticated, function(req, res, next) {
 router.post('/', tools.isAuthenticated, function(req, res, next){
     tools.getLocalizacao(req.body.latitude, req.body.longitude, function(err, localiza){
         
+        var user = req.user[0] || req.user;
+        
         if (err) {
             localiza ={
                 country: req.body.pais,
@@ -94,7 +96,8 @@ router.post('/', tools.isAuthenticated, function(req, res, next){
             "class1": 0,
             "class2": 0,
             "class3": 0,
-            "sumComentarios": 0
+            "sumComentarios": 0,
+            "_user": user._id,
         };
         
         momentoCtrl.insert(momento, function(err, result) {
