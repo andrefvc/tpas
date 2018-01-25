@@ -39,6 +39,7 @@ app.controller("viagensCtrl", function($q, $scope, $http, $rootScope, $timeout, 
                 $scope.viagens = response.data.Data;                
                 App.unblockUI();
                 App.init();
+               
             });   
     };
 
@@ -153,36 +154,55 @@ app.controller("viagensCtrl", function($q, $scope, $http, $rootScope, $timeout, 
             });           
     };
 
-    $scope.increveViagem= function(viagem){
-
-        var inscricao = {  
-            idViagem:viagem.id,
-            idUtilizador:$rootScope.currentUser.id, 
-            dataInscricao: new Date()
-          };
+    $scope.deleteViagemIncricao = function() {
 
         App.blockUI({ boxed: true });
-         $http({ 
-            method: 'POST',
-            url: '/api/v2/inscricaoViagem',
-            data: inscricao,
-            headers: {'Content-Type': undefined},
-            transformRequest: function (data, headersGetter) {
-                var formData = new FormData();
-                
-                angular.forEach(data, function (value, key) {
-                    formData.append(key, value);
-                });
+        $http({ 
+            method: 'delete',
+            url: '/api/v2/inscricaoViagem/viagem/'+  $location.search().idViagem +'/utilizador/'+$location.search().idUtilizador ,
+            params: $location.search()
+        }).then(function (response) {            
+                             
+             });   
+    };
 
-                var headers = headersGetter();
-                delete headers['Content-Type'];
+    $scope.getViagemIncricao = function(idViagem) {
 
-                return formData;
-            }
-        }).then(function (response) {
-            $scope.partilhado = {'background-color': '#F1C40F;'}
+        App.blockUI({ boxed: true });
+        $http({ 
+            method: 'GET',
+            url: '/api/v2/inscricaoViagem/viagem/'+  idViagem +'/utilizador/'+ $rootScope.currentUser.id ,
+  
+            params: $location.search()
+        }).then(function (response) {            
+                $scope.incrito = response.data.Data;                
+                App.unblockUI();
+                App.init();
+               
+            });   
+    };
 
-        });
+    $scope.incrito
+
+    $scope.increveViagem= function(viagem){
+
+        App.blockUI({ boxed: true });
+        $http({ 
+            method: 'GET',
+            url: '/api/v2/inscricaoViagem/viagem/'+  viagem.id +'/utilizador/'+ $rootScope.currentUser.id ,
+        }).then(function (response) {            
+                $scope.incrito = response.data.Data;   
+                if($scope.incrito.id != undefined)
+                {
+                    $("#incritoViagem").attr("style","background-color:#F1C40F")
+                }
+                else{
+                    $("#incritoViagem").attr("style","background-color:#aaa")
+                }
+                         
+                App.unblockUI();
+                App.init();
+       });  
 
     }
 
@@ -239,7 +259,7 @@ app.controller("viagensCtrl", function($q, $scope, $http, $rootScope, $timeout, 
             aprovadoPor: "",
             aprovado: 0
         }        
-
+      
         App.blockUI({ boxed: true });
          $http({ 
             method: 'POST',

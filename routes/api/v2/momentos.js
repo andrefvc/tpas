@@ -5,6 +5,7 @@ var fs = require('fs');
 var tools = require(path.join(__dirname, '/../../../tools'));
 var momentoCtrl = require(path.join(__dirname, '/../../../controllers/momentos.js'))
 
+
 router.get('/viagem/:idViagem', tools.isAuthenticated, function(req, res, next) {
     momentoCtrl.find({idViagem: req.params.idViagem}, { }, function(err, result) {
         if(err)

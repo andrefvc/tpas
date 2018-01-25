@@ -14,12 +14,9 @@ function update(id, data, callback) {
     });
 }
 
-function remove(idViagem,idUtilizador, callback) {
-    findById(idViagem,idUtilizador, { id: 1 }, function(err, data){
-        if (err)
-            return callback(err);
-
-        model.remove({ idViagem: idViagem ,idUtilizador:idUtilizador}, function(err, remove) {
+function remove(id, callback) {
+    
+        model.remove({id: id }, function(err, remove) {
             if (remove.result.n == 0) {            
                 err = new Error("Item not found");  
                 err.Error = remove;       
@@ -28,7 +25,7 @@ function remove(idViagem,idUtilizador, callback) {
 
             callback(err,remove);
         });
-    });
+   
 }
 
 function findById(id, projection, callback) {

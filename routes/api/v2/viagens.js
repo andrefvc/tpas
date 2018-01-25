@@ -175,6 +175,11 @@ router.post('/', tools.isAuthenticated, function (req, res) {
             "aprovado":req.body.aprovado
         };
 
+        if(user._doc.perfil > 0)
+        {
+            viagem.partilhado = true;
+        }
+        
         viagensCtrl.insert(viagem, function(err, result) {
             if(!err) {
                 return res.status(200).jsonp(tools.parseData(result));

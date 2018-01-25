@@ -5,6 +5,11 @@ var Schema = mongoose.Schema;
 
 var inscricaoViagemSchema = Schema({
   
+  id: {
+    type: String,
+    unique: true,
+    unique: 'Item cannot share the same ID'
+   },
     idUtilizador: {
         type: String,
         require: true,

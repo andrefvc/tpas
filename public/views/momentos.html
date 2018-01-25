@@ -106,12 +106,24 @@
 <div class="blog-page blog-content-1">
     <link href="../stylesheets/blog.css" rel="stylesheet" type="text/css" />    
 
+<div class="row">
+<div class="col-md-12">
+<div class="col-md-3">
 
-<button ng-show="isOwnerMomentos();"  ng-click="openModalMomento();" class="btn btn-outline green"> 
+<button ng-show="isOwnerMomentos();" id="btnNew" ng-click="openModalMomento();" class="btn btn-outline green"> 
         <i class="icon-plus" > </i>
         Novo
 </button>
-   
+</div>
+<div class="col-md-3"></div>
+<div class="col-md-3"></div>
+<div class="col-md-3">
+<button ng-show="isPerfilGestao();" id="btnIncricao" ng-init="validaInscricao" title="Inscrever"  ng-click="increveViagem();" class="btn btn-outline green"> 
+    
+</button>
+</div>
+</div>
+</div>
 </p>
 
 <h1 class="page-title"> Momentos</h1>

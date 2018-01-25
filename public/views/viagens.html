@@ -130,10 +130,10 @@
                          class="ribbon ribbon-vertical-right uppercase" ng-class="{ 'ribbon-color-warning': viagem.partilhado }">
                             <i class="fa fa-share-alt"></i>
                         </div>
-                        <div ng-show="isOwner(viagem.idUtilizador);" ng-click="increveViagem(viagem);" style="cursor:pointer" title="Partilhar"
-                         class="ribbon ribbon-vertical-right uppercase" ng-class="{ 'ribbon-color-warning': viagem.partilhado } ">
+                        <!-- <div ng-if="viagem._user.perfil > 0" id="incritoViagem" ng-show="isOwner(viagem.idUtilizador);" ng-click="increveViagem(viagem);" style="cursor:pointer" title="Inscrever"
+                         class="ribbon ribbon-vertical-right uppercase" >
                             <i class="fa fa-pencil-square-o"></i>
-                        </div>
+                        </div> -->
                         <div ng-click="openMomentos(viagem);">
                             <a href="javascript:;">
                                 <img src="{{ viagem.ficheiros.nome }}" />
