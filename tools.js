@@ -1,10 +1,13 @@
 //andre
 var fs = require('fs');
+var path = require('path');
 const uuidV4 = require('uuid/v4');
 var fileType = require('file-type');
 var where = require('where');
 var Forecast = require('forecast');
 var NodeGeocoder = require('node-geocoder');
+var jwt    = require('jsonwebtoken');
+var config = require(path.join(__dirname, 'config/main'));
 
 var responseJSON = function(message=''){
   if(message == '')
@@ -179,6 +182,35 @@ var auth = require('basic-auth');
 
 var isAuthenticated = function(req, res, next){
 
+    // check header or url parameters or post parameters for token
+    var token = req.headers['authorization'];
+
+    // decode token
+    if (token) {
+
+        // verifies secret and checks exp
+        jwt.verify(token, config.secret, function(err, decoded) {          
+            if (err) {
+                var err = parseError(new Error("Utilizador não autenticado!"));
+                err.ErrorCode = 401;
+                return res.status(401).jsonp(err);
+            }
+            else {
+                // if everything is good, save to request for use in other routes
+                req.decoded = decoded;    
+                next();
+            }
+        });
+
+    } else {
+
+        // if there is no token
+        // return an error
+        var err = parseError(new Error("Utilizador não autenticado!"));
+        err.ErrorCode = 403;
+        return res.status(403).jsonp(err);
+    }
+    /*
     var authdata = auth(req);
 
     if (authdata){
@@ -207,6 +239,7 @@ var isAuthenticated = function(req, res, next){
         }
         next();
     });
+    */
 }
 
 var guid = function guid() {

@@ -58,13 +58,17 @@ app.get('/:nome', function (req, res, next) {
       newUser.facebook = req.body.facebook;
 
       userCtrl.insert(newUser, function(err, user){
-          if (err) return res.status(400).jsonp(tools.parseError(err));;
+        if (err) 
+          return res.status(400).jsonp(tools.parseError(err));;
 
-          req.login(user, function(err) {
-            if (err) return res.status(400).jsonp(tools.parseError(err));;
+          
+        var authenticator = passport.authenticate ('local');
+        authenticator (req, res, function(err, user){
+          if (err)
+            return res.status(400).jsonp(tools.parseError(err));
 
-            res.status(200).jsonp(tools.parseData(user));
-          });
+          res.status(200).jsonp(tools.parseData(res.req.user));
+        });
       });
     }); 
 

@@ -1,5 +1,6 @@
 module.exports = {  
 'database': 'mongodb://sa:sa@ds139342.mlab.com:39342/tripstogether'  ,
+'secret': 'ilovescotchyscotch',
 
 //// dev
 'facebook': {

@@ -11,6 +11,7 @@ const swaggerDocumentV2 = require('./swaggerV2.json');
 var passport = require('passport');
 var session = require('express-session');
 var http = require('http');
+var tools = require(path.join(__dirname, 'tools'));
 
 
 
@@ -37,10 +38,6 @@ var dashboard = require('./routes/api/v2/dashboard');
 //Express
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
@@ -62,11 +59,12 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 //Body-parser
-app.use(bodyParser.json()); //for parsing application/json
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: false
 }));
+app.use(bodyParser.json()); //for parsing application/json
 
 //swagger
 var options = {};
@@ -98,15 +96,11 @@ app.use('/api/v2/dashboard', dashboard);
 require('./routes/api/v2/auth.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 
-
-var tools = require(path.join(__dirname, 'tools'));
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Rota não encontrada');
   err.status = 404;
   err.ErrorCode = 404;
-  //next(err);
   res.status(404).jsonp(tools.parseError(err));
 });
 
@@ -116,13 +110,6 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
-    /*
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });    
-    */
     console.dir(err);
     res.status(err.status || 500).jsonp(tools.parseError(err));
   });
@@ -131,17 +118,8 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  /*
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
-  */
   console.dir(err);
   res.status(err.status || 500).jsonp(tools.parseError(err));
 });
-
-
 
 module.exports = app;

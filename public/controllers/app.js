@@ -119,7 +119,7 @@ app.run(['$rootScope', '$location', '$cookieStore', '$http', 'AuthenticationServ
                 $location.path() !== '/register' &&
                 $location.path() !== '/dashboard') 
             {                
-                $location.path('/login');
+              //  $location.path('/login');
                 return;
             }
 

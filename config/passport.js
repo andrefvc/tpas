@@ -1,13 +1,14 @@
 // load all the things we need
 var LocalStrategy    = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
-
+var jwt    = require('jsonwebtoken');
 var userCtrl = require('../controllers/utilizadores.js');
 
 // load the auth variables
 var configAuth = require('../config/main');
 
 module.exports = function(passport) {
+
     passport.serializeUser(function(user, done) {        
         done(null, user.id);
     });
@@ -35,6 +36,15 @@ module.exports = function(passport) {
                 if (!user.comparePassword(password))
                     return done(new Error('Password inválida!'));
 
+                const payload = {
+                    admin: user._doc.perfil 
+                    };
+    
+                var token = jwt.sign(payload, configAuth.secret, {
+                    //expiresInMinutes: 1440 // expires in 24 hours
+                });
+                user._doc.token = token;
+                
                 return done(null, user);
             });
         }
@@ -56,6 +66,15 @@ module.exports = function(passport) {
                 return done(new Error('Utilizador inexistente!'));
             }
             
+            const payload = {
+                admin: user._doc.perfil 
+              };
+
+            var token = jwt.sign(payload, configAuth.secret, {
+                //expiresInMinutes: 1440 // expires in 24 hours
+            });
+            user._doc.token = token;
+
             return done(null, user);
         });
     }
@@ -76,6 +95,15 @@ module.exports = function(passport) {
             if (!user){
                 return done(new Error('Utilizador inexistente!'));
             }
+
+            const payload = {
+                admin: user._doc.perfil 
+              };
+
+            var token = jwt.sign(payload, configAuth.secret, {
+                //expiresInMinutes: 1440 // expires in 24 hours
+            });
+            user._doc.token = token;
             
             return done(null, user);
         });
@@ -111,6 +139,15 @@ module.exports = function(passport) {
                     if (err)
                         return done(err);
 
+                    const payload = {
+                        admin: user._doc.perfil 
+                        };
+        
+                    var token = jwt.sign(payload, configAuth.secret, {
+                        //expiresInMinutes: 1440 // expires in 24 hours
+                    });
+                    user._doc.token = token;
+                    
                     return done(null, user);
                 });
             })
