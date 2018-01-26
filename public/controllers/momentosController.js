@@ -31,7 +31,7 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
     $scope.getMomentos = function() {
         App.blockUI({ boxed: true });
 
-        $scope.validaInscricao();
+       // $scope.validaInscricao();
         $http({
             method: 'GET',
             url: '/api/v2/momentos/viagem/'+ $location.search().idViagem,
@@ -53,10 +53,10 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
                         method: 'GET',
                         url:'/api/v2/inscricaoViagem/viagemUser/' + $location.search().idViagem,
             
-                    }).then(function (responseVld) {
+                     }).then(function (responseVld) {
             
                         $scope.incrito = responseVld.data.Data;
-                        if($scope.incrito != undefined)
+                        if($scope.incrito.length > 0)
                         {
                             $("#btnIncricao")[0].innerText = "Remover Inscrição";
                             $("#btnNew").css('display','block');
