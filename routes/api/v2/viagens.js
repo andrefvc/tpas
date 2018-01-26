@@ -105,15 +105,14 @@ router.put('/:id', tools.isAuthenticated, function(req, res, next) {
 
     var viagem = { };
 
-    if (req.body.aprovado)
     viagem.aprovado = req.body.aprovado;
     if (req.body.aprovadoPor)
     viagem.aprovadoPor = req.body.aprovadoPor;
     if (req.body.aprovadoEm)
         viagem.aprovadoEm = req.body.aprovadoEm;
-    if (req.body.popular)
+    
         viagem.popular = req.body.popular;
-    if (req.body.partilhado)
+    
         viagem.partilhado = req.body.partilhado;
     if (req.body.dataInicio)
         viagem.dataInicio = req.body.dataInicio;

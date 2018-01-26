@@ -50,7 +50,7 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
                 }
                 else{
                     $("#btnNew").css('display','none');
-                    $("#btnIncricao")[0].innerText ="Inscrever"
+                    $("#btnIncricao")[0].innerText ="Inscrever";
                 }
                   
                 $http({
@@ -284,7 +284,7 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
                 $("#btnNew").css('display','block');
             }
             else{
-                $("#btnIncricao")[0].innerText ="Inscrever"
+                $("#btnIncricao")[0].innerText ="Inscrever";
                 $("#btnNew").css('display','none');
             }
 
@@ -308,7 +308,7 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
                     $("#btnNew").css('display','block');
                 }
                 else{
-                    $("#btnIncricao")[0].innerText ="Inscrever"
+                    $("#btnIncricao")[0].innerText ="Inscrever";
                     $("#btnNew").css('display','none');
                 }
     
