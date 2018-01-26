@@ -31,7 +31,7 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
     $scope.getMomentos = function() {
         App.blockUI({ boxed: true });
 
-
+        $scope.validaInscricao();
         $http({
             method: 'GET',
             url: '/api/v2/momentos/viagem/'+ $location.search().idViagem,
