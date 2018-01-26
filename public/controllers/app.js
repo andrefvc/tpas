@@ -102,7 +102,7 @@ app.run(['$rootScope', '$location', '$cookieStore', '$http', 'AuthenticationServ
         // keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
         if ($rootScope.globals.currentUser) {
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+            $http.defaults.headers.common['Authorization'] = $rootScope.globals.currentUser.token; // jshint ignore:line
         }
         
         if ($rootScope.globals.currentUser)
@@ -110,29 +110,29 @@ app.run(['$rootScope', '$location', '$cookieStore', '$http', 'AuthenticationServ
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
 
-            // redirect to login page if not logged in
-            //able routes without credentials
-            if (!$rootScope.globals.currentUser && 
-                $location.path() !== '/search' && 
-                $location.path() !== '/publicViagens' &&
-                $location.path() !== '/login' &&
-                $location.path() !== '/register' &&
-                $location.path() !== '/dashboard') 
-            {                
-              //  $location.path('/login');
-                return;
-            }
+        // redirect to login page if not logged in
+        //able routes without credentials
+        if (!$rootScope.globals.currentUser && 
+            $location.path() !== '/search' && 
+            $location.path() !== '/publicViagens' &&
+            $location.path() !== '/login' &&
+            $location.path() !== '/register' &&
+            $location.path() !== '/dashboard') 
+        {                
+            //  $location.path('/login');
+            return;
+        }
 
-            if ($location.path() === '/login'){
-                AuthenticationService.ClearCredentials();
-                AuthenticationService.Logout();
-                return;
-            }
+        if ($location.path() === '/login'){
+            AuthenticationService.ClearCredentials();
+            AuthenticationService.Logout();
+            return;
+        }
 
-            getNotificacoes($rootScope, $http);
+        getNotificacoes($rootScope, $http);
             
-        });
-    }]);
+    });
+}]);
     
 
 app.directive("ngFile", [function () {
