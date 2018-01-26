@@ -27,7 +27,7 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
             },100);
         });
     };
-
+    $scope.viagem
     $scope.getMomentos = function() {
         App.blockUI({ boxed: true });
 
@@ -53,6 +53,25 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
                     $("#btnIncricao")[0].innerText ="Inscrever"
                 }
                   
+                $http({
+                    method: 'GET',
+                    url:'/api/v2/viagens/' + $location.search().idViagem,
+        
+                }).then(function (responseViagem) {
+                    $scope.viagem = responseViagem.data.Data;
+
+                    if( $scope.viagem._user.perfil > 0)
+                    {
+                        $("#btnIncricao").css('display','block');
+                    }
+                    else
+                    {
+                        $("#btnIncricao").css('display','none');
+                    }
+                    
+
+                });
+
             });
             $scope.momentos = response.data.Data;
             App.unblockUI();

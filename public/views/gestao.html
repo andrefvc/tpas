@@ -1,4 +1,6 @@
 <!-- <div ng-include="'views/gestao.html'" id="responsive" class="modal fade" tabindex="-1" data-width="660"></div> -->
+<link rel="stylesheet" type="text/css" media="screen" href="stylesheets/smartadmin-production-plugins.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="stylesheets/smartadmin-production.min.css">
 
 <div id="modalViagem" class="modal fade" tabindex="-1" data-width="1024">
     <div class="modal-header">
@@ -77,67 +79,67 @@
     <div class="row">
 
         <div simple-grid="GridGestao"></div>
-    <table class="table table-striped">
+    <table class="display projects-table table table-striped table-bordered table-hover">
                    
-            <thead> 
-                <tr>
-                    <th>
-                        <td style="width:30%">
-                            Viagem
-                        </td>
-                        <td style="width:30%" >
-                            Utilizador
-                        </td>
-                        <td style="width:30%">
-                            Pública
-                        </td>
-                        <td style="width:30%">
-                            Acções
-                        </td>
+        <thead> 
+            <tr>
+             
+                    <th style="width:30%">
+                        Viagem
                     </th>
-            
-                </tr>
-            </thead>
-            <tbody>   
-                    <tr ng-repeat="viagem in viagens">
-                        <td></td>
-                        <div class="col-md-3">
-                        <td>
-                            {{viagem.descricao}}
-                        </td>
-                    </div>
-                        <div class="col-md-3">  <td >
-                            {{viagem._user.nome}}  
-                        </td>
-                    </div>
-                        <div class="col-md-3"> 
-                             <td>
-                             {{viagem.partilhado}}
-                        </td>
-                    </div>
+                    <th style="width:30%" >
+                        Utilizador
+                    </th>
+                    <th style="width:30%">
+                        Pública
+                    </th>
+                    <th style="width:30%">
+                        Acções
+                    </th>
+                
+        
+            </tr>
+        </thead>
+        <tbody>   
+                <tr ng-repeat="viagem in viagens">
+                    <td></td>
+                    <div class="col-md-3">
+                    <td>
+                        {{viagem.descricao}}
+                    </td>
+                </div>
+                    <div class="col-md-3">  <td >
+                        {{viagem._user.nome}}  
+                    </td>
+                </div>
                     <div class="col-md-3"> 
-                        <td>
-                          
-                                <div class="col-md-4">
-                                     <div   style="cursor:pointer" ng-click="openModalViagem(viagem)" title="Info" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
-                                         <i class="fa fa-info"></i><!--info-->
-                                      </div>
+                         <td>
+                         {{viagem.partilhado}}
+                    </td>
+                </div>
+                <div class="col-md-3"> 
+                    <td>
+                      
+                            <div class="col-md-4">
+                                 <div   style="cursor:pointer" ng-click="openModalViagem(viagem)" title="Info" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
+                                     <i class="fa fa-info"></i><!--info-->
+                                  </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div   style="cursor:pointer" title="Aprovar" ng-click="aprovarViagem(viagem)" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
+                                     <i class="fa fa-check"></i> <!--check-->
                                 </div>
-                                <div class="col-md-4">
-                                    <div   style="cursor:pointer" title="Aprovar" ng-click="aprovarViagem(viagem)" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
-                                         <i class="fa fa-check"></i> <!--check-->
-                                    </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div   style="cursor:pointer" title="Remover" ng-click="removerViagem(viagem)" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
+                                     <i class="fa fa-trash-o"></i>
                                 </div>
-                                <div class="col-md-4">
-                                    <div   style="cursor:pointer" title="Remover" ng-click="removerViagem(viagem)" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
-                                         <i class="fa fa-trash-o"></i>
-                                    </div>
-                                </div>                               
-                            
-                        </td>
-                    </div>
-                    </tr>
-            </tbody>     
+                            </div>                               
+                        
+                    </td>
+                </div>
+                </tr>
+        </tbody>      
     </table>
 
       

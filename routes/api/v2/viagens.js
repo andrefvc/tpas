@@ -10,7 +10,13 @@ router.get('/',   function(req, res, next) {
 
     if (req.query.query) {
 
-        if (req.query.query == 'publicas'){
+        if (req.query.query == 'naprovadas')
+        {
+            query = { 
+                aprovado: false
+            } 
+        }
+        else if (req.query.query == 'publicas'){
             query = { 
                 partilhado: true
             }
