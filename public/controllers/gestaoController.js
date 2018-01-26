@@ -3,6 +3,8 @@ app.controller("gestaoCtrl", function($q, $scope, $http, $rootScope, $timeout, $
     $scope.viagens = [];
     $scope.viagem = [];
 
+    
+    
     $scope.getViagensAll = function() {
 
         App.blockUI({ boxed: true });
@@ -42,7 +44,7 @@ app.controller("gestaoCtrl", function($q, $scope, $http, $rootScope, $timeout, $
             url: '/api/v2/viagens/' + viagem.id,
             data: {
                 aprovadoEm: new Date(),
-                aprovadoPor: user.id,
+                aprovadoPor: $rootScope.currentUser.id,
                 aprovado: 1 }
         }).then(function (response) {    
 
@@ -93,7 +95,7 @@ app.controller("gestaoCtrl", function($q, $scope, $http, $rootScope, $timeout, $
 
             toastr.success('Viagem removida!');
 
-            $scope.getViagens();
+            $scope.getViagensAll();
             App.unblockUI();
         });
 
