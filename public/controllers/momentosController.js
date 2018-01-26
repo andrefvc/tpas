@@ -278,7 +278,7 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
         }).then(function (response) {
 
             $scope.incrito = response.data.Data;
-            if($scope.incrito.id != undefined)
+            if($scope.incrito != undefined)
             {
                 $("#btnIncricao")[0].innerText = "Remover Inscrição"
                 $("#btnNew").css('display','block');
