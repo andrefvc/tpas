@@ -229,6 +229,8 @@ app.controller("viagensCtrl", function($q, $scope, $http, $rootScope, $timeout, 
         $scope.dataFim = moment(new Date()).add(1, 'days').format('DD-MM-YYYY');
         $scope.descricao = '';
         $scope.image = [];
+        $scope.maxIncricoes = '';
+
         $('#gmap_geocoding_address').val();
     }
     
@@ -258,7 +260,7 @@ app.controller("viagensCtrl", function($q, $scope, $http, $rootScope, $timeout, 
             aprovadoEm: new Date(),
             aprovadoPor: "",
             aprovado: 0,
-          //  maxIncricoes = $scope.maxIncricoes
+            maxIncricoes: $scope.maxIncricoes
         }        
       
         App.blockUI({ boxed: true });

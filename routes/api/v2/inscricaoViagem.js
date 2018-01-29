@@ -5,6 +5,7 @@ var path = require('path');
 var tools = require(path.join(__dirname, '/../../../tools'));
 var incricaoViagemCtrl = require(path.join(__dirname, '/../../../controllers/inscricaoViagem.js'));
 var viagensCtrl = require(path.join(__dirname, '/../../../controllers/viagens.js'));
+
 router.get('/', tools.isAuthenticated, function(req, res, next) {
     incricaoViagemCtrl.findAll({ }, function(err, result) {
         if(err)
@@ -42,9 +43,11 @@ router.get('/viagem/:idViagem/utilizador/:idUtilizador', tools.isAuthenticated, 
                     if(err)
                         return res.status(400).jsonp(tools.parseError(err));        
                         
-                        if(rincricoes.length >= rviagem._doc.maxIncricoes) //getviagem
-                        return res.status(200).jsonp(tools.parseError("Número máximo inscritos atingido!!"));
-
+                        if(rviagem.length>0)
+                        {
+                         if(rincricoes.length >= rviagem[0]._doc.maxIncricoes) //getviagem
+                         return res.status(200).jsonp(tools.parseError("Número máximo inscritos atingido!!"));
+                        }
                         var incricaoViagem = { 
                         "idUtilizador": req.params.idUtilizador,
                         "idViagem": req.params.idViagem,
@@ -58,7 +61,7 @@ router.get('/viagem/:idViagem/utilizador/:idUtilizador', tools.isAuthenticated, 
                         }
                     }); 
 
-                    return res.status(200).jsonp(tools.parseData(rincricoes[0]));
+                    return res.status(200).jsonp(tools.parseData(rincricoes));
 
                 });
                 

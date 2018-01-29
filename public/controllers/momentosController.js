@@ -44,7 +44,7 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
             }).then(function (responseViagem) {
                 $scope.viagem = responseViagem.data.Data;
 
-                if($rootScope._user.id == $scope.viagem.idUtilizador)
+                if($rootScope.currentUser.id == $scope.viagem.idUtilizador)
                 {
                     $("#btnNew").css('display','block');
                     $("#btnIncricao").css('display','none');
