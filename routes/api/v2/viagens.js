@@ -177,7 +177,8 @@ router.post('/', tools.isAuthenticated, function (req, res) {
             "sumClass3": 0,
             "aprovadoEm":req.body.aprovadoEm,
             "aprovadoPor":req.body.aprovadoPor,
-            "aprovado":req.body.aprovado
+            "aprovado":req.body.aprovado,
+            "maxIncricoes": req.body.maxIncricoes
         };
 
         if(user._doc.perfil > 0)

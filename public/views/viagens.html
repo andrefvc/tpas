@@ -13,16 +13,24 @@
                     <div class="form form-body">                        
                         <div class="form-group">
                             <label class="control-label col-md-2">Período</label>
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <div class="input-group input-medium date-picker input-daterange" data-date-format="dd-mm-yyyy">
                                     <input ng-readonly="true" ng-model="dataInicio" type="text" class="form-control" name="from">
                                     <span class="input-group-addon"> to </span>
                                     <input ng-readonly="true" ng-model="dataFim" type="text" class="form-control" name="to"> </div>
                                 <!-- /input-group -->
                             </div>
+
+                             <!--ng-if="viagem._user.perfil > 0"-->
+                             <!-- <div class="col-md-2">
+                                <div>
+                                   
+                                    <input ng-model="maxIncricoes" type="text" class="form-control"> 
+                                </div>
+                            </div> --> 
                             <div class="col-md-2">
                                 <div class="pull-right">
-                                    <input type="checkbox" class="make-switch" data-on-text="&nbsp;Publica&nbsp;" data-off-text="&nbsp;Privada&nbsp;">
+                                    <input type="text" class="make-switch" data-on-text="&nbsp;Publica&nbsp;" data-off-text="&nbsp;Privada&nbsp;">
                                 </div>
                             </div>
                         </div>

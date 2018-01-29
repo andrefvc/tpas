@@ -4,7 +4,7 @@ var router = express.Router();
 var path = require('path');
 var tools = require(path.join(__dirname, '/../../../tools'));
 var incricaoViagemCtrl = require(path.join(__dirname, '/../../../controllers/inscricaoViagem.js'));
-
+var viagensCtrl = require(path.join(__dirname, '/../../../controllers/viagens.js'));
 router.get('/', tools.isAuthenticated, function(req, res, next) {
     incricaoViagemCtrl.findAll({ }, function(err, result) {
         if(err)
@@ -32,18 +32,40 @@ router.get('/viagem/:idViagem/utilizador/:idUtilizador', tools.isAuthenticated, 
             
         if(result.length == 0)
         {
-            var incricaoViagem = { 
-                "idUtilizador": req.params.idUtilizador,
-                "idViagem": req.params.idViagem,
-                "dataInscricao": new Date()
-            };
-            incricaoViagemCtrl.insert(incricaoViagem, function(err, result) {
-                if(!err) {
-                    return res.status(200).jsonp(tools.parseData(result));
-                } else {
-                    return res.status(400).jsonp(tools.parseError(err));
-                }
-            }); 
+
+            viagensCtrl.findById(req.params.idViagem,function(err, rviagem) {
+                if(err)
+                    return res.status(400).jsonp(tools.parseError(err));        
+             
+
+                incricaoViagemCtrl.find({idViagem:req.params.idViagem}, null, function(err, rincricoes) {
+                    if(err)
+                        return res.status(400).jsonp(tools.parseError(err));        
+                        
+                        if(rincricoes.length >= rviagem._doc.maxIncricoes) //getviagem
+                        return res.status(200).jsonp(tools.parseError("Número máximo inscritos atingido!!"));
+
+                        var incricaoViagem = { 
+                        "idUtilizador": req.params.idUtilizador,
+                        "idViagem": req.params.idViagem,
+                        "dataInscricao": new Date()
+                    };
+                    incricaoViagemCtrl.insert(incricaoViagem, function(err, resultPost) {
+                        if(!err) {
+                            return res.status(200).jsonp(tools.parseData(resultPost));
+                        } else {
+                            return res.status(400).jsonp(tools.parseError(err));
+                        }
+                    }); 
+
+                    return res.status(200).jsonp(tools.parseData(rincricoes[0]));
+
+                });
+                
+            });
+
+
+           
         }
         else{
             incricaoViagemCtrl.remove(result[0]._doc.id, function(err, resultdel) {
@@ -67,7 +89,7 @@ router.get('/:id', tools.isAuthenticated, function(req, res, next) {
 });
 
 router.get('/viagem/:idViagem', tools.isAuthenticated, function(req, res, next) {
-    incricaoViagemCtrl.findById(req.params.idViagem, null, function(err, result) {
+    incricaoViagemCtrl.find({idViagem:req.params.idViagem}, null, function(err, result) {
         if(err)
             return res.status(400).jsonp(tools.parseError(err));        
             

@@ -257,7 +257,8 @@ app.controller("viagensCtrl", function($q, $scope, $http, $rootScope, $timeout, 
             ficheiros: $scope.image[0],
             aprovadoEm: new Date(),
             aprovadoPor: "",
-            aprovado: 0
+            aprovado: 0,
+          //  maxIncricoes = $scope.maxIncricoes
         }        
       
         App.blockUI({ boxed: true });

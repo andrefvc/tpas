@@ -51,6 +51,10 @@ var viagemSchema = Schema({
     visualizacoes: {
       type: Number,
       default:0
+    },
+    maxIncricoes: {
+      type: Number,
+      default:0
     }
 }, 
 { 

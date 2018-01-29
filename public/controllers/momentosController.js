@@ -37,45 +37,55 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
             url: '/api/v2/momentos/viagem/'+ $location.search().idViagem,
         }).then(function (response) {
                 
-                $http({
-                    method: 'GET',
-                    url:'/api/v2/viagens/' + $location.search().idViagem,
-        
-                }).then(function (responseViagem) {
-                    $scope.viagem = responseViagem.data.Data;
+            $http({
+                method: 'GET',
+                url:'/api/v2/viagens/' + $location.search().idViagem,
+    
+            }).then(function (responseViagem) {
+                $scope.viagem = responseViagem.data.Data;
 
-                    if( $scope.viagem._user.perfil > 0)
+                if($rootScope._user.id == $scope.viagem.idUtilizador)
+                {
+                    $("#btnNew").css('display','block');
+                    $("#btnIncricao").css('display','none');
+                }
+                else{
+
+                    if($scope.viagem._user.perfil > 0)
                     {
+
                         $("#btnIncricao").css('display','block');
-
-
-                          $http({
-                        method: 'GET',
-                        url:'/api/v2/inscricaoViagem/viagemUser/' + $location.search().idViagem,
-            
-                     }).then(function (responseVld) {
-            
-                        $scope.incrito = responseVld.data.Data;
-                        if($scope.incrito.length > 0)
-                        {
-                            $("#btnIncricao")[0].innerText = "Remover Inscrição";
-                            $("#btnNew").css('display','block');
-                        }
-                        else{
-                            $("#btnNew").css('display','none');
-                            $("#btnIncricao")[0].innerText ="Inscrever";
-                        }
-                        
+                   
+                            $http({
+                                method: 'GET',
+                                url:'/api/v2/inscricaoViagem/viagemUser/' + $location.search().idViagem,
                     
-                    });
-
-                    }
-                    else
-                    {
+                            }).then(function (responseVld) {
+                    
+                                $scope.incrito = responseVld.data.Data;
+                                if($scope.incrito.length > 0)
+                                {
+                                    $("#btnIncricao")[0].innerText = "Remover Inscrição";
+                                    $("#btnNew").css('display','block');
+                                }
+                                else{
+                                    $("#btnNew").css('display','none');
+                                    $("#btnIncricao")[0].innerText ="Inscrever";
+                                }
+                                
+                            
+                            });
+                    }   
+                    else{
+                        $("#btnNew").css('display','none');
                         $("#btnIncricao").css('display','none');
                     }
-                                    
+
+                }
+
             });
+
+
             $scope.momentos = response.data.Data;
             App.unblockUI();
         }, function (response) {
