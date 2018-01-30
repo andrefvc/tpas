@@ -229,8 +229,8 @@ app.controller("viagensCtrl", function($q, $scope, $http, $rootScope, $timeout, 
         $scope.dataFim = moment(new Date()).add(1, 'days').format('DD-MM-YYYY');
         $scope.descricao = '';
         $scope.image = [];
-        $scope.maxIncricoes = '';
-        $scope.preco = 0;
+        $scope.maxIncricoes ;
+        $scope.preco ;
         $scope.perfil =  $rootScope.currentUser.perfil
 
       

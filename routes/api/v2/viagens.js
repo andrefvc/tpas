@@ -178,7 +178,8 @@ router.post('/', tools.isAuthenticated, function (req, res) {
             "aprovadoEm":req.body.aprovadoEm,
             "aprovadoPor":req.body.aprovadoPor,
             "aprovado":req.body.aprovado,
-            "maxIncricoes": req.body.maxIncricoes
+            "maxIncricoes": req.body.maxIncricoes,
+            "preco":req.body.preco
         };
 
         if(user._doc.perfil > 0)
