@@ -55,6 +55,10 @@ var viagemSchema = Schema({
     maxIncricoes: {
       type: Number,
       default:0
+    },
+    preco: {
+      type: Number,
+      default:0
     }
 }, 
 { 

@@ -29,13 +29,20 @@
                                 </div>
                             </div>
                         </div>
-
-                            <div class="col-md-6">
-                                <div>
-                                      <span class="input-group-addon"> Max Inscricoes </span>
-                                      <input ng-model="maxIncricoes" type="text" class="form-control"> 
-                                </div>
-                            </div>  
+                            <div ng-if="perfil > 0" id="aditionalInfo" >
+                                <div class="col-md-6">
+                                    <div>
+                                        <span class="input-group-addon"> Max Inscricoes </span>
+                                        <input ng-model="maxIncricoes" type="text" class="form-control"> 
+                                    </div>
+                                </div>  
+                                <div class="col-md-6">
+                                    <div>
+                                        <span class="input-group-addon"> preco </span>
+                                        <input ng-model="preco" type="spin" class="form-control"> 
+                                    </div>
+                                </div>  
+                             </div> 
                         <div class="col-md-8">
                             <div class="form-group">
                                 <textarea ng-model="descricao" class="form-control todo-taskbody-taskdesc" rows="9" placeholder="Descrição..."></textarea>

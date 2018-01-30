@@ -230,7 +230,10 @@ app.controller("viagensCtrl", function($q, $scope, $http, $rootScope, $timeout, 
         $scope.descricao = '';
         $scope.image = [];
         $scope.maxIncricoes = '';
+        $scope.preco = 0;
+        $scope.perfil =  $rootScope.currentUser.perfil
 
+      
         $('#gmap_geocoding_address').val();
     }
     
@@ -260,7 +263,8 @@ app.controller("viagensCtrl", function($q, $scope, $http, $rootScope, $timeout, 
             aprovadoEm: new Date(),
             aprovadoPor: "",
             aprovado: 0,
-            maxIncricoes: $scope.maxIncricoes
+            maxIncricoes: $scope.maxIncricoes,
+            preco: $scope.preco
         }        
       
         App.blockUI({ boxed: true });

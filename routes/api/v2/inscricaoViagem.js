@@ -28,6 +28,12 @@ router.get('/viagemUser/:idViagem', tools.isAuthenticated, function(req, res, ne
 router.get('/viagem/:idViagem/utilizador/:idUtilizador', tools.isAuthenticated, function(req, res, next) {    
     incricaoViagemCtrl.find({idViagem:req.params.idViagem,idUtilizador:req.params.idUtilizador}, function(err, result){
   
+                 var incricaoViagem = { 
+                    "idUtilizador": req.params.idUtilizador,
+                    "idViagem": req.params.idViagem,
+                    "dataInscricao": new Date()
+                };
+                
         if(err)
             return res.status(400).jsonp(tools.parseError(err));        
             
@@ -35,11 +41,11 @@ router.get('/viagem/:idViagem/utilizador/:idUtilizador', tools.isAuthenticated, 
         {
 
             viagensCtrl.findById(req.params.idViagem,function(err, rviagem) {
-                if(err)
+                     if(err)
                     return res.status(400).jsonp(tools.parseError(err));        
              
 
-                incricaoViagemCtrl.find({idViagem:req.params.idViagem}, null, function(err, rincricoes) {
+                 incricaoViagemCtrl.find({idViagem:req.params.idViagem}, null, function(err, rincricoes) {
                     if(err)
                         return res.status(400).jsonp(tools.parseError(err));        
                         
@@ -48,22 +54,18 @@ router.get('/viagem/:idViagem/utilizador/:idUtilizador', tools.isAuthenticated, 
                          if(rincricoes.length >= rviagem[0]._doc.maxIncricoes) //getviagem
                          return res.status(200).jsonp(tools.parseError("Número máximo inscritos atingido!!"));
                         }
-                        var incricaoViagem = { 
-                        "idUtilizador": req.params.idUtilizador,
-                        "idViagem": req.params.idViagem,
-                        "dataInscricao": new Date()
-                    };
-                    incricaoViagemCtrl.insert(incricaoViagem, function(err, resultPost) {
-                        if(!err) {
-                            return res.status(200).jsonp(tools.parseData(resultPost));
-                        } else {
-                            return res.status(400).jsonp(tools.parseError(err));
-                        }
-                    }); 
+                   
+                     incricaoViagemCtrl.insert(incricaoViagem, function(err, resultPost) {
+                            if(!err) {
+                                return res.status(200).jsonp(tools.parseData(resultPost));
+                            } else {
+                                return res.status(400).jsonp(tools.parseError(err));
+                            }
+                         }); 
 
-                    return res.status(200).jsonp(tools.parseData(rincricoes));
+                    //return res.status(200).jsonp(tools.parseData(rincricoes));
 
-                });
+                 });
                 
             });
 
