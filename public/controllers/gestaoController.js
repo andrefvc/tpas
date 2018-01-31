@@ -32,6 +32,8 @@ app.controller("gestaoCtrl", function($q, $scope, $http, $rootScope, $timeout, $
             { field: '_user.nome' },
              { field: 'partilhado' }]
         }
+
+        
     }
         
 
@@ -58,9 +60,36 @@ app.controller("gestaoCtrl", function($q, $scope, $http, $rootScope, $timeout, $
         $('#modalViagem').modal({ show: 'true' }); 
         App.init();
 
-        $scope.getViagemById(viagem); 
+         $http({ 
+            method: 'GET',
+            url: '/api/v2/viagens/' + viagem.id,
+        }).then(function (response) {            
+            $scope.viagem = response.data.Data; 
+            $scope.dataInicio =  $scope.viagem.dataInicio;
+            $scope.dataFim =   $scope.viagem.dataFim;
+            $scope.descricao =  $scope.viagem.descricao;
+            $scope.pais =  $scope.viagem.pais;
+            $scope.cidade =  $scope.viagem.cidade;
+            $scope._user =  $scope.viagem._user.nome;
+            $scope.image = [];
+            App.unblockUI();
+        
+            var coords = [];
+                setTimeout(function(){
+                 
+                        coords.push({
+                            lat: $scope.viagem.latitude,
+                            lng: $scope.viagem.longitude,
+                            descricao: $scope.viagem.pais + " - " + $scope.viagem.cidade
+                        });
+              
+             });
+            
+                MapsGoogle.mapLoadMarkers(coords);
 
-       
+        });   
+
+           
 
     }
 

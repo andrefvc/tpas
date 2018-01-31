@@ -2,20 +2,23 @@
 <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/smartadmin-production-plugins.min.css">
 <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/smartadmin-production.min.css">
 
+ <link href="../stylesheets/blog.css" rel="stylesheet" type="text/css" />    
+
+
+
 <div id="modalViagem" class="modal fade" tabindex="-1" data-width="1024">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
         <h4 class="modal-title">Detalhes Viagem</h4>
     </div>
     <div class="modal-body">
-        <div class="form-group ">
-                <div class="col-md-2">
-                        <span class="input-group-addon"> Utilizador</span>
-                </div>
-            <div class="col-md-2">
+       
+       <div class="form-group">
+            <div class="col-md-4">
+                    <label class="input-group-addon"> Utilizador</label>
                     <input ng-readonly="true" ng-model="_user" type="text" class="form-control" name="nome"> 
             </div>
-           
+            <label class="control-label col-md-2">Período</label>
             <div class="col-md-8">
                     <div class="input-group input-medium date-picker input-daterange" data-date-format="dd-mm-yyyy">
                         <input ng-readonly="true" ng-model="dataInicio" type="text" class="form-control" name="from">
@@ -24,12 +27,17 @@
                     </div>
                     <!-- /input-group -->
             </div>
-        </div>
-        <div class="form-group ">
-                <div class="col-md-12">
-                        <span class="input-group-addon"> Descricção </span>
-                        <input ng-readonly="true" ng-model="descricao" type="text" class="form-control" name="Descricao"> </div>
+      </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                        <span class="input-group-addon"> Descrição </span>
+                        <input ng-readonly="true" ng-model="descricao" type="textarea" class="form-control" name="Descricao"> 
                 </div>
+                <div class="col-md-6">
+                     <img src="{{ viagem.ficheiros.nome }}"  />
+                </div>
+            </div>
         </div>
 
         <div class="form-group ">
@@ -46,7 +54,9 @@
                 
             </div>
         </div>
-
+                <div class="search-container ">
+                    <div id="gmap_geocoding" class="gmaps"> </div>            
+                </div>
         
     </div>
 </div>
@@ -54,22 +64,8 @@
 
 
 <div class="container-fluid" >
-<div ng-init="getViagensAll();" ng-show="currentUser" class="portlet-body">
-    <div class="row">
-        <div  class="form-group">
-            <div class="col-md-12">
-                <ul class="media-list">
-                    <li class="media">
-                        <a class="pull-left" href="javascript:;">
-                            <img ng-show="currentUser.foto" class="todo-userpic" src="{{ currentUser.foto }}" width="27px" height="27px"> </a>
-                        <div class="media-body">
-                            <textarea ng-click="openModalViagem();" class="form-control todo-taskbody-taskdesc" rows="2" placeholder="onde vai ser a proxima viagem?" ></textarea>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+<div ng-init="getViagensAll(); " ng-show="currentUser" class="portlet-body">
+ 
 </div>
 
 <h1 class="page-title"> Gestão
@@ -103,18 +99,19 @@
         <tbody>   
                 <tr ng-repeat="viagem in viagens">
                     
-                    <div class="col-md-3">
+                <div class="col-md-4">
                     <td>
                         {{viagem.descricao}}
                     </td>
                 </div>
-                    <div class="col-md-3">  <td >
+                    <div class="col-md-4">  
+                    <td >
                         {{viagem._user.nome}}  
                     </td>
                 </div>
-                    <div class="col-md-3"> 
-                         <td>
-                         {{viagem.partilhado}}
+                    <div class="col-md-1"> 
+                    <td>
+                      <input type="checkbox" class="make-switch" data-on-text="&nbsp;Sim&nbsp;" data-off-text="&nbsp;Não&nbsp;" ng-checked="{{viagem.partilhado}}">                                                                
                     </td>
                 </div>
                 <div class="col-md-3"> 
@@ -141,10 +138,7 @@
                 </tr>
         </tbody>      
     </table>
-
-      
-    
-
+  
   </div>
 </div>
 

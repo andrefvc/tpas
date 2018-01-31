@@ -11,21 +11,18 @@
             <div class="col-md-12">
                 <form action="#" class="form-horizontal form-bordered">
                     <div class="form form-body">                        
-                        <div class="form-group">
+                      <div class="form-group">
                             <label class="control-label col-md-2">Período</label>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <div class="input-group input-medium date-picker input-daterange" data-date-format="dd-mm-yyyy">
                                     <input ng-readonly="true" ng-model="dataInicio" type="text" class="form-control" name="from">
                                     <span class="input-group-addon"> to </span>
                                     <input ng-readonly="true" ng-model="dataFim" type="text" class="form-control" name="to"> </div>
                                 <!-- /input-group -->
                             </div>
-
-                             <!--ng-if="viagem._user.perfil > 0"-->
-                           
                             <div class="col-md-2">
                                 <div class="pull-right">
-                                    <input type="text" class="make-switch" data-on-text="&nbsp;Publica&nbsp;" data-off-text="&nbsp;Privada&nbsp;">
+                                    <input type="checkbox" class="make-switch" data-on-text="&nbsp;Publica&nbsp;" data-off-text="&nbsp;Privada&nbsp;">
                                 </div>
                             </div>
                         </div>
@@ -147,7 +144,7 @@
                          class="ribbon ribbon-vertical-right uppercase" ng-class="{ 'ribbon-color-warning': viagem.partilhado }">
                             <i class="fa fa-share-alt"></i>
                         </div>
-                        <div ng-show="viagem._user.perfil > 0" id="incritoViagem"   style="cursor:pointer" title="Preco"
+                        <div ng-show="viagem._user.perfil > 0" id="incritoViagem"   style="cursor:pointer; color: white;" title="Preco"
                          class="ribbon  uppercase" >
                             {{viagem.preco}}€
                         </div>
