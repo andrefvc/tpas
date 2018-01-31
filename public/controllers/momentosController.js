@@ -28,6 +28,7 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
         });
     };
     $scope.viagem
+    $scope.nInscritos
     $scope.getMomentos = function() {
         App.blockUI({ boxed: true });
 
@@ -73,7 +74,14 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
                                     $("#btnIncricao")[0].innerText ="Inscrever";
                                 }
                                 
-                            
+                                $http({
+                                    method: 'GET',
+                                    url:'api/v2/inscricaoViagem/viagem/'+ $location.search().idViagem
+                                }).then(function (responseTotal) {
+                                            
+                                    $scope.nInscritos = responseTotal.data.Data.length
+
+                                });
                             });
                     }   
                     else{

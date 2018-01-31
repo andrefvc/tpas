@@ -52,7 +52,11 @@ router.get('/viagem/:idViagem/utilizador/:idUtilizador', tools.isAuthenticated, 
                         if(rviagem.length>0)
                         {
                          if(rincricoes.length >= rviagem[0]._doc.maxIncricoes) //getviagem
-                         return res.status(200).jsonp(tools.parseError("Número máximo inscritos atingido!!"));
+                         {
+                             err = "Número máximo inscritos atingido!!";
+                            return res.status(400).jsonp(tools.parseError(err));
+                         }
+                         
                         }
                    
                      incricaoViagemCtrl.insert(incricaoViagem, function(err, resultPost) {
@@ -98,7 +102,7 @@ router.get('/viagem/:idViagem', tools.isAuthenticated, function(req, res, next) 
         if(err)
             return res.status(400).jsonp(tools.parseError(err));        
             
-        return res.status(200).jsonp(tools.parseData(result[0]));
+        return res.status(200).jsonp(tools.parseData(result));
     });
 });
 
