@@ -15,7 +15,6 @@ var addNotificacaoComentarioViagem = function(_idUser, viagem){
         _user: _idUser
     }
 
-    notificacao.tipo = 1;
     var cidade = (viagem.cidade != undefined) ? 'a ' + viagem.cidade : '';
     var pais = (viagem.pais != undefined) ? ', '+ viagem.pais : '';
     notificacao.descricao = ' adicionou um comentário à sua viagem ' + cidade + pais;
@@ -24,63 +23,72 @@ var addNotificacaoComentarioViagem = function(_idUser, viagem){
 
 var addNotificacaoComentarioMomento = function(_idUser, idUtilizador, momento){
 
-    
-    
     db.Viagem.find({ id: momento.idViagem }, { idUtilizador:1}, function(err, viagem){
         
+        var cidade = (momento.cidade != undefined) ? 'em ' + momento.cidade : '';
+        var pais = (momento.pais != undefined) ? ', '+ momento.pais : '';
+
         var notificacao = {
             idViagem: null,
             idMomento: momento.id,
             idUtilizador: viagem[0].idUtilizador,
-            descricao: '',
+            descricao: ' adicionou um comentário à experiência ' + cidade + pais,
             tipo: 1,
             _user: _idUser
         }
-        
-        notificacao.tipo = 1;
-        var cidade = (momento.cidade != undefined) ? 'em ' + momento.cidade : '';
-        var pais = (momento.pais != undefined) ? ', '+ momento.pais : '';
-        notificacao.descricao = ' adicionou um comentário à experiência ' + cidade + pais;
+                
         insert(notificacao);
-
     });
 }
 
 var addNotificacaoClassificacaoViagem = function(_idUser, viagem){
 
+    var cidade = (viagem.cidade != undefined) ? 'a ' + viagem.cidade : '';
+    var pais = (viagem.pais != undefined) ? ', ' + viagem.pais : '';
+
     var notificacao = {
         idViagem: viagem.id,
         idMomento: null,
         idUtilizador: viagem.idUtilizador,
-        descricao: '',
-        tipo: 1,
+        descricao: ' classificou a viagem ' + cidade + pais,
+        tipo: 2,
         _user: _idUser
     }
-
-    notificacao.tipo = 2;
-    var cidade = (viagem.cidade != undefined) ? 'a ' + viagem.cidade : '';
-    var pais = (viagem.pais != undefined) ? ', ' + viagem.pais : '';
-    notificacao.descricao = ' classificou a viagem ' + cidade + pais;
+    
     insert(notificacao);    
 }
 
 var addNotificacaoClassificacaoMomento = function(_idUser, idUtilizador, momento){
 
+    var cidade = (momento.cidade != undefined) ? 'em ' + momento.cidade : '';
+    var pais = (momento.pais != undefined) ? ', '+ momento.pais : '';
+
     var notificacao = {
         idViagem: momento.idViagem,
         idMomento: momento.id,
         idUtilizador: idUtilizador,
-        descricao: '',
+        descricao: ' classificou a experiência ' + cidade + pais,
+        tipo: 2,
+        _user: _idUser
+    }
+
+    insert(notificacao);    
+}
+
+var addNotificacaoAprovarViagem = function(_idUser, viagem){
+
+    var cidade = (viagem.cidade != undefined) ? ' a ' + viagem.cidade : '';
+    var pais = (viagem.pais != undefined) ? ', ' + viagem.pais : '';
+
+    var notificacao = {
+        idViagem: viagem.idViagem,
+        idMomento: null,
+        idUtilizador: viagem.idUtilizador,
+        descricao: ' Aprovou a sua viagem' + cidade + pais,
         tipo: 1,
         _user: _idUser
     }
 
-
-
-    notificacao.tipo = 2;
-    var cidade = (momento.cidade != undefined) ? 'em ' + momento.cidade : '';
-    var pais = (momento.pais != undefined) ? ', '+ momento.pais : '';
-    notificacao.descricao = ' classificou a experiência ' + cidade + pais;
     insert(notificacao);    
 }
 
@@ -139,3 +147,4 @@ exports.addNotificacaoComentarioViagem = addNotificacaoComentarioViagem;
 exports.addNotificacaoClassificacaoViagem = addNotificacaoClassificacaoViagem;
 exports.addNotificacaoComentarioMomento = addNotificacaoComentarioMomento;
 exports.addNotificacaoClassificacaoMomento = addNotificacaoClassificacaoMomento;
+exports.addNotificacaoAprovarViagem = addNotificacaoAprovarViagem;

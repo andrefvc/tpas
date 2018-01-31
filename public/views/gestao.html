@@ -61,7 +61,7 @@
                 <ul class="media-list">
                     <li class="media">
                         <a class="pull-left" href="javascript:;">
-                            <img class="todo-userpic" src="{{ currentUser.foto }}" width="27px" height="27px"> </a>
+                            <img ng-show="currentUser.foto" class="todo-userpic" src="{{ currentUser.foto }}" width="27px" height="27px"> </a>
                         <div class="media-body">
                             <textarea ng-click="openModalViagem();" class="form-control todo-taskbody-taskdesc" rows="2" placeholder="onde vai ser a proxima viagem?" ></textarea>
                         </div>
