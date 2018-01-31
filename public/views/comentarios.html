@@ -13,7 +13,7 @@
                     <ul class="media-list">
                         <li class="media">
                             <a class="pull-left" href="javascript:;">
-                                <img class="todo-userpic" src="{{ currentUser.foto }}" width="27px" height="27px"> </a>
+                                <img ng-show="currentUser.foto" class="todo-userpic" src="{{ currentUser.foto }}" width="27px" height="27px"> </a>
                             <div class="media-body">
                                 <textarea class="form-control todo-taskbody-taskdesc" rows="3" placeholder="Escrever comentário..." 
                                             ng-model="comment"></textarea>
@@ -33,7 +33,7 @@
                         <div id="removeCommentMomentosBtn" ng-show="isOwner(comentario.idUtilizador);" ng-click="removerComentarioMomento(comentario);"  class="ribbon ribbon-right ribbon-color-default uppercase " style="cursor:pointer" title="Remover" >
                             <i class="fa fa-trash-o"></i>
                         </div>                       
-                        <img class="todo-userpic pull-left" src="{{comentario._user.foto}}" width="27px" height="27px">
+                        <img ng-show="comentario.foto" class="todo-userpic pull-left" src="{{comentario._user.foto}}" width="27px" height="27px">
                         <div class="todo-tasklist-item-title"> {{ comentario._user.nome}} </div>
                         <div class="todo-tasklist-item-text"> {{ comentario.comentario }} </div>
                         <div class="todo-tasklist-controls pull-left">

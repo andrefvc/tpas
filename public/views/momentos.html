@@ -150,7 +150,7 @@
                     <div class="mt-timeline-icon bg-blue bg-font-blue border-grey-steel" style="left:15%">
                         <div class="ribbon ribbon-vertical-left" style="background-color:transparent;">
                             <a href="#!/profile?id={{momento._user.id}}">
-                                <img style="-webkit-border-radius: 50%!important; width: 70px;" title="{{momento._user.nome}}" src="{{momento._user.foto}}" />
+                                <img ng-show="momento._user.foto" style="-webkit-border-radius: 50%!important; width: 70px;" title="{{momento._user.nome}}" src="{{momento._user.foto}}" />
                             </a>
                         </div>   
                     </div>

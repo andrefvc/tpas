@@ -4,6 +4,7 @@ var router = express.Router();
 var path = require('path');
 var tools = require(path.join(__dirname, '/../../../tools'));
 var viagensCtrl = require(path.join(__dirname, '/../../../controllers/viagens.js'));
+var notificacoesCtrl = require(path.join(__dirname, '/../../../controllers/notificacoes.js'));
 
 router.get('/',   function(req, res, next) {
     var query = {};
@@ -110,9 +111,9 @@ router.put('/:id', tools.isAuthenticated, function(req, res, next) {
     viagem.aprovadoPor = req.body.aprovadoPor;
     if (req.body.aprovadoEm)
         viagem.aprovadoEm = req.body.aprovadoEm;
-    
+    if (req.body.popular != undefined)
         viagem.popular = req.body.popular;
-    
+    if (req.body.partilhado != undefined)
         viagem.partilhado = req.body.partilhado;
     if (req.body.dataInicio)
         viagem.dataInicio = req.body.dataInicio;
@@ -126,8 +127,20 @@ router.put('/:id', tools.isAuthenticated, function(req, res, next) {
     viagensCtrl.update(req.params.id, viagem, function(err, result) {
         if(err)
             return res.status(400).jsonp(tools.parseError(err));        
-            
-        return res.status(200).jsonp(tools.parseData(result)); 
+        
+        if ((new Date().getMinutes() - new Date(viagem.aprovadoEm).getMinutes()) < 2){
+            viagensCtrl.findById(req.params.id, null, function(err, viagems) {
+                if(err)
+                    return res.status(400).jsonp(tools.parseError(err));        
+                    
+                var user = req.user[0] || req.user;
+                notificacoesCtrl.addNotificacaoAprovarViagem(user._id, viagems[0]);
+
+                return res.status(200).jsonp(tools.parseData(result[0]));        
+            });
+        }
+        else
+            return res.status(200).jsonp(tools.parseData(result)); 
     });  
 });
 
