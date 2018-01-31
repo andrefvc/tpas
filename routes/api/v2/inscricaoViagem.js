@@ -53,7 +53,7 @@ router.get('/viagem/:idViagem/utilizador/:idUtilizador', tools.isAuthenticated, 
                         {
                          if(rincricoes.length >= rviagem[0]._doc.maxIncricoes) //getviagem
                          {
-                             err = "Número máximo inscritos atingido!!";
+                             err = new Error("Número máximo inscritos atingido!!");
                             return res.status(400).jsonp(tools.parseError(err));
                          }
                          
