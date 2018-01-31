@@ -5,7 +5,6 @@ app.controller('LoginController',
         
 
         $scope.login = function (credentials) {
-            AuthenticationService.ClearCredentials();
             $('.alert-danger', $('.login-form')).hide();
             if (!$scope.email || !$scope.password){
                 toastr.warning('Email e password obrigatórios');
@@ -15,16 +14,13 @@ app.controller('LoginController',
             App.blockUI({ boxed: true });
             AuthenticationService.Login($scope.email, $scope.password, function (response) {
                 App.unblockUI();
-                if (response.status == 200) {
-                    AuthenticationService.SetCredentials(response.data.Data);                   
+                if (response.status == 200) {              
                     $location.path('/home');
                 }             
             });
         };
 
         $scope.loginFacebook = function () {
-            AuthenticationService.ClearCredentials();
-
             App.blockUI({ boxed: true });
             FB.login(function(res) {
                 if (res.authResponse) {
@@ -32,7 +28,6 @@ app.controller('LoginController',
                         AuthenticationService.LoginFacebook(res.authResponse.userID, function (response) {           
                             App.unblockUI();    
                             if (response.status == 200) {
-                                AuthenticationService.SetCredentials(response.data.Data);
                                 $location.path('/home');
                             } else {
                                 $rootScope.newUser={};
@@ -74,16 +69,12 @@ app.controller('LoginController',
             AuthenticationService.Register(user, function (response) {     
                 App.unblockUI();
                 if (response.data.ErrorCode == 200) {
-                    AuthenticationService.SetCredentials(response.data.Data);  
                     $location.path('/home');
                 }               
             });
         }
 
         $scope.logout = function() {    
-
-            AuthenticationService.ClearCredentials();
-
             App.blockUI({ boxed: true });
             AuthenticationService.Logout(function (response) {
                 App.unblockUI();

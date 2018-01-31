@@ -52,7 +52,7 @@ app.config(['$routeProvider','$httpProvider', function ($routeProvider, $httpPro
     $httpProvider.interceptors.push(['$q', '$location', '$rootScope', '$cookieStore',
         function($q, $location, $rootScope, $cookieStore) {
         return {
-        'response': function(response) {
+        'response': function(response) {            
             if (response.config.method.toUpperCase() !== 'GET') {
             //console.info('successful GET');
             }
@@ -110,28 +110,9 @@ app.run(['$rootScope', '$location', '$cookieStore', '$http', 'AuthenticationServ
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
 
-        // redirect to login page if not logged in
-        //able routes without credentials
-        if (!$rootScope.globals.currentUser && 
-            $location.path() !== '/search' && 
-            $location.path() !== '/publicViagens' &&
-            $location.path() !== '/login' &&
-            $location.path() !== '/register' &&
-            $location.path() !== '/dashboard') 
-        {                
-            //  $location.path('/login');
-            return;
-        }
-
-        if ($location.path() === '/login'){
-            AuthenticationService.ClearCredentials();
-            AuthenticationService.Logout();
-            return;
-        }
-
-        getNotificacoes($rootScope, $http);
-            
-    });
+            getNotificacoes($rootScope, $http);
+                
+        });
 }]);
     
 
