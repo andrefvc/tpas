@@ -39,7 +39,7 @@ app.controller("gestaoCtrl", function($q, $scope, $http, $rootScope, $timeout, $
     }
     
 
-    $scope.removerViagem = function(viaidViagemgem){    
+    $scope.removerViagem = function(idViagem){    
         App.blockUI({ boxed: true });
 
         $http({ 
@@ -61,10 +61,7 @@ app.controller("gestaoCtrl", function($q, $scope, $http, $rootScope, $timeout, $
             url: '/api/v2/viagens/' + idViagem,
         }).then(function (response) {            
             $scope.viagemView = response.data.Data;
-            App.init();
-            //if ($scope.viagemView.partilhado)
-                //$('.switch-view').val($scope.viagemView.partilhado);
-                $('#modalViagem').modal({ show: 'true' });   
+        
             var coords = [];
             setTimeout(function(){
                 
@@ -74,9 +71,15 @@ app.controller("gestaoCtrl", function($q, $scope, $http, $rootScope, $timeout, $
                     descricao: $scope.viagemView.pais + " - " + $scope.viagemView.cidade
                 });
                 MapsGoogle.mapLoadMarkers(coords);
+                
+                $('#modalViagem').modal({ show: 'true' });   
+                // init datepicker
+                $('.date-picker').datepicker({
+                    rtl: App.isRTL(),
+                    orientation: "left",
+                    autoclose: true
+                });
 
-                App.init();
-               
                 App.unblockUI();
                 App.init();
              },1000);                

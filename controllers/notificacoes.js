@@ -92,6 +92,26 @@ var addNotificacaoAprovarViagem = function(_idUser, viagem){
     insert(notificacao);    
 }
 
+
+var addNotificacaoRemoverViagem = function(_idUser, viagem){
+
+    var cidade = (viagem.cidade != undefined) ? ' a ' + viagem.cidade : '';
+    var pais = (viagem.pais != undefined) ? ', ' + viagem.pais : '';
+
+    var notificacao = {
+        idViagem: viagem.idViagem,
+        idMomento: null,
+        idUtilizador: viagem.idUtilizador,
+        descricao: ' Removeu a sua viagem' + cidade + pais,
+        tipo: 1,
+        _user: _idUser
+    }
+
+    insert(notificacao);    
+}
+
+
+
 function insert(data, callback) {
     var item = new model(data);
     item.save(function(err, obj) {
@@ -148,3 +168,4 @@ exports.addNotificacaoClassificacaoViagem = addNotificacaoClassificacaoViagem;
 exports.addNotificacaoComentarioMomento = addNotificacaoComentarioMomento;
 exports.addNotificacaoClassificacaoMomento = addNotificacaoClassificacaoMomento;
 exports.addNotificacaoAprovarViagem = addNotificacaoAprovarViagem;
+exports.addNotificacaoRemoverViagem = addNotificacaoRemoverViagem;
