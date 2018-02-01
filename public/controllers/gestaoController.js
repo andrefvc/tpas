@@ -39,7 +39,7 @@ app.controller("gestaoCtrl", function($q, $scope, $http, $rootScope, $timeout, $
     }
     
 
-    $scope.removerViagem = function(viaidViagemgem){    
+    $scope.removerViagem = function(idViagem){    
         App.blockUI({ boxed: true });
 
         $http({ 

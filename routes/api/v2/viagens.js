@@ -155,6 +155,11 @@ router.delete('/:id', tools.isAuthenticated, function(req, res, next) {
             
             tools.imageDelete(viagem[0].ficheiros.nome);
 
+            var user = req.user[0] || req.user;
+
+            if (user.perfil == 1 && viagem[0].idUtilizador != user.id)
+            notificacoesCtrl.addNotificacaoRemoverViagem(user._id, viagem[0]);
+
             return res.status(200).jsonp(tools.parseData(result)); 
         });    
     });
