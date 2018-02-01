@@ -8,7 +8,7 @@ var inscricoesCtrl = require('../controllers/inscricaoviagem.js');
 
 /// obtem toas as viagens agrupadas por pais
 function getViagensGroupByPais(callback) {      
-        
+         
     var viagensDTO = [];
     
     // contar todos os users
