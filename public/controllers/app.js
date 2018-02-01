@@ -110,6 +110,11 @@ app.run(['$rootScope', '$location', '$cookieStore', '$http', 'AuthenticationServ
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
 
+            if ($location.path() === '/login'){
+                //AuthenticationService.ClearCredentials();
+                AuthenticationService.Logout();
+                return;
+            }
             getNotificacoes($rootScope, $http);
                 
         });
