@@ -17,18 +17,21 @@
                 <form action="#" class="form-horizontal form-bordered">
                     <div class="form form-body">                        
                         <div class="form-group">
+
+                            <label class="control-label col-md-2">Período</label>
+                            <div class="col-md-4">
+                                <div class="input-group input-medium date-picker input-daterange" data-date-format="dd-mm-yyyy">
+                                    <input ng-readonly="true" ng-model="viagemView.dataInicio" type="text" class="form-control" name="from">
+                                    <span class="input-group-addon"> to </span>
+                                    <input ng-readonly="true" ng-model="viagemView.dataFim" type="text" class="form-control" name="to"> </div>
+                            </div>
+                                
                             <label class="control-label col-md-2">Utilizador</label>
-                            <div class="col-md-10">
-                                <div class="input-group input-large">
+                            <div class="col-md-4">
+                                <div class="input-group">
                                     <input ng-readonly="true" ng-model="viagemView._user.nome" type="text" class="form-control" name="Utilizador">
                                 </div>
-                                <!-- /input-group -->
-                            </div>
-                            <div class="col-md-2">
-                                <div class="pull-right">
-                                    
-                                </div>
-                            </div>
+                            </div>                            
                         </div>
 
                         
