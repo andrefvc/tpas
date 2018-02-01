@@ -194,7 +194,14 @@ router.post('/', tools.isAuthenticated, function (req, res) {
             "maxIncricoes": req.body.maxIncricoes,
             "preco": req.body.preco
         };
-                     
+
+        if(user._doc.perfil > 0)
+        {
+            viagem.aprovado = true;
+            viagem.aprovadoEm = new Date(); 
+            viagem.aprovadoPor =req.body.idUtilizador;
+        }
+        
         viagensCtrl.insert(viagem, function(err, result) {
             if(!err) {
                 return res.status(200).jsonp(tools.parseData(result));
