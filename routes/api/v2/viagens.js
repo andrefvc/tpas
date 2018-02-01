@@ -199,12 +199,7 @@ router.post('/', tools.isAuthenticated, function (req, res) {
             "maxIncricoes": req.body.maxIncricoes,
             "preco": req.body.preco
         };
-
-        if(user._doc.perfil > 0)
-        {
-            viagem.partilhado = true;
-        }
-        
+                     
         viagensCtrl.insert(viagem, function(err, result) {
             if(!err) {
                 return res.status(200).jsonp(tools.parseData(result));
@@ -216,13 +211,13 @@ router.post('/', tools.isAuthenticated, function (req, res) {
 });
 
 
-router.get('/utilizador/:perfil', tools.isAuthenticated, function(req, res, next) {
-    viagensCtrl.find({perfil: req.params.idUtilizador}, { }, function(err, result) {
-        if(err)
-            return res.status(400).jsonp(tools.parseError(err));        
+// router.get('/utilizador/:perfil', tools.isAuthenticated, function(req, res, next) {
+//     viagensCtrl.find({perfil: req.params.idUtilizador}, { }, function(err, result) {
+//         if(err)
+//             return res.status(400).jsonp(tools.parseError(err));        
             
-        return res.status(200).jsonp(tools.parseData(result)); 
-    });
-});
+//         return res.status(200).jsonp(tools.parseData(result)); 
+//     });
+// });
 
 module.exports = router;

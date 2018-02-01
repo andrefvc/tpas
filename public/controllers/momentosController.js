@@ -49,6 +49,14 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
                 {
                     $("#btnNew").css('display','block');
                     $("#btnIncricao").css('display','none');
+                    $http({
+                        method: 'GET',
+                        url:'api/v2/inscricaoViagem/viagem/'+ $location.search().idViagem
+                    }).then(function (responseTotal) {
+                                
+                        $scope.nInscritos = responseTotal.data.Data.length
+
+                    });
                 }
                 else{
 
