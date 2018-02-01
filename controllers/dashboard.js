@@ -4,11 +4,11 @@ var viagemModel = db.Viagem;
 
 var viagensCtrl = require('../controllers/viagens.js');
 var utilizadoresCtrl = require('../controllers/utilizadores.js');
-var inscricoesCtrl = require('../controllers/inscricaoviagem.js');
+var inscricoesCtrl = require('../controllers/inscricaoViagem.js');
 
 /// obtem toas as viagens agrupadas por pais
 function getViagensGroupByPais(callback) {      
-         
+        
     var viagensDTO = [];
     
     // contar todos os users
