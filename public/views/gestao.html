@@ -6,51 +6,74 @@
 
 
 
-<div id="modalViagem" class="modal fade" tabindex="-1" data-width="1024">
+ <div id="modalViagem" class="modal fade" tabindex="-1" data-width="760">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h4 class="modal-title">Detalhes Viagem</h4>
+        <h4 class="modal-title">Visualizar Viagem</h4>
     </div>
-  <div class="modal-body">
-       
-    <div class="form-group">
-        <div class="form-group">
-                <label class="control-label col-md-2">Período</label>
-                <div class="col-md-8">
-                    <div class="input-group input-medium date-picker input-daterange" data-date-format="dd-mm-yyyy">
-                        <input ng-readonly="true" ng-model="dataInicio" type="text" class="form-control" name="from">
-                        <span class="input-group-addon"> to </span>
-                        <input ng-readonly="true" ng-model="dataFim" type="text" class="form-control" name="to"> 
-                    </div>
-                    <!-- /input-group -->
-                </div>
-                <div class="col-md-2">
-                    <div >
-                            <label class="input-group-addon"> Utilizador</label>
-                            <input ng-readonly="true" ng-model="_user" type="text" class="form-control" name="nome"> 
-                    </div>
-                </div>
-        </div>
-            
-           <div class="row"></div>
-            <div class="col-md-8">
-                <div class="form-group">
-                    <span class="input-group-addon"> Descrição </span>
-                    <textarea ng-model="descricao" ng-readonly="true" class="form-control todo-taskbody-taskdesc" rows="9"></textarea>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <img src="{{ viagem.ficheiros.nome }}"  />
-            </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form action="#" class="form-horizontal form-bordered">
+                    <div class="form form-body">                        
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Utilizador</label>
+                            <div class="col-md-10">
+                                <div class="input-group input-large">
+                                    <input ng-readonly="true" ng-model="viagemView._user.nome" type="text" class="form-control" name="Utilizador">
+                                </div>
+                                <!-- /input-group -->
+                            </div>
+                            <div class="col-md-2">
+                                <div class="pull-right">
+                                    
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="form-group ">
-                <div class="col-md-12">
-                       <div id="gmap_geocoding" class="gmaps"> </div>
-                 </div>
+                        
+                    
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <div ng-show ="viagemView._user.perfil > 0" >
+                                    <span class="input-group-addon"> Máximo Inscriçõess </span>
+                                    <input ng-model="viagemView.maxIncricoes"  class="form-control"> 
+                                </div>
+                            </div>  
+                            <div class="col-md-6">
+                                <div ng-show ="viagemView._user.perfil > 0" >
+                                    <span class="input-group-addon"> Preço </span>
+                                    <input ng-model="viagemView.preco"  class="form-control"> 
+                                </div>
+                            </div>  
+                        </div> 
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <textarea ng-model="viagemView.descricao" class="form-control todo-taskbody-taskdesc" rows="9" placeholder="Descrição..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <div class="col-md-6">
+                                <div class="fileinput-preview thumbnail">
+                                    <img src="viagemView.ficheiros.nome">
+                                    
+                                </div>
+                            </div>
+                        </div>   
+                        <div class="form-group ">
+                            <div class="col-md-12">
+                                <div id="gmap_geocoding" class="gmaps"> </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-        
+        </div>
     </div>
-  </div>
+    <div class="modal-footer">            
+        <button type="button" data-dismiss="modal" class="btn btn-outline dark">Fechar <i class="fa fa-remove"></i></button>
+    </div>
 </div>
  
 <div ng-init="getViagensAll(); " ng-show="currentUser" class="portlet-body">
@@ -98,17 +121,17 @@
                         
                             <td>
                                 <div class="col-md-4">
-                                        <div   style="cursor:pointer" ng-click="openModalViagem(viagem)" title="Info" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
+                                        <div   style="cursor:pointer" ng-click="openModalViagem(viagem.id)" title="Info" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
                                             <i class="fa fa-info"></i><!--info-->
                                         </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div   style="cursor:pointer" title="Aprovar" ng-click="aprovarViagem(viagem)" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
+                                    <div   style="cursor:pointer" title="Aprovar" ng-click="aprovarViagem(viagem.id)" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
                                             <i class="fa fa-check"></i> <!--check-->
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div   style="cursor:pointer" title="Remover" ng-click="removerViagem(viagem)" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
+                                    <div   style="cursor:pointer" title="Remover" ng-click="removerViagem(viagem.id)" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
                                             <i class="fa fa-trash-o"></i>
                                     </div>
                                 </div>    

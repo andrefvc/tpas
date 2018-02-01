@@ -2,118 +2,84 @@ app.controller("gestaoCtrl", function($q, $scope, $http, $rootScope, $timeout, $
 
     $scope.viagens = [];
     $scope.viagem = [];
+    $scope.viagemView ={};
 
-    
-    
     $scope.getViagensAll = function() {
-
         App.blockUI({ boxed: true });
+
         $http({ 
             method: 'GET',
             url: '/api/v2/viagens',
             params: $location.search()
         }).then(function (response) {            
                 $scope.viagens = response.data.Data;                
-                App.unblockUI();
+                
                 setTimeout(function(){
                     App.init();
+                    App.unblockUI();
                 });
         });   
     };
  
-
-
-    $scope.aprovarViagem = function(viagem){
-        
+    $scope.aprovarViagem = function(idViagem){        
         App.blockUI({ boxed: true });
+
          $http({ 
             method: 'PUT',
-            url: '/api/v2/viagens/' + viagem.id,
+            url: '/api/v2/viagens/' + idViagem,
             data: {
                 aprovadoEm: new Date(),
                 aprovadoPor: $rootScope.currentUser.id,
                 aprovado: 1 }
-        }).then(function (response) {    
-
-            // $scope.partilhado = {'background-color': '#F1C40F;'}
-             $scope.getViagensAll();            
-            }); 
+        }).then(function (response) {
+            App.unblockUI();
+            toastr.success('Viagem aprovada com sucesso!');
+            $scope.getViagensAll();         
+        }); 
     }
     
 
-    $scope.openModalViagem = function(viagem){
-        $('#modalViagem').modal({ show: 'true' }); 
-        App.init();
+    $scope.removerViagem = function(viaidViagemgem){    
+        App.blockUI({ boxed: true });
+
+        $http({ 
+           method: 'DELETE',
+           url: '/api/v2/viagens/' + idViagem
+        }).then(function (response) {
+            App.unblockUI();
+            toastr.success('Viagem removida com sucesso!');
+            $scope.getViagensAll();            
+        });
+    }    
+
+    
+    $scope.openModalViagem = function(idViagem){       
+        App.blockUI({ boxed: true });
 
          $http({ 
             method: 'GET',
-            url: '/api/v2/viagens/' + viagem.id,
+            url: '/api/v2/viagens/' + idViagem,
         }).then(function (response) {            
-            $scope.viagem = response.data.Data; 
-            $scope.dataInicio =  $scope.viagem.dataInicio;
-            $scope.dataFim =   $scope.viagem.dataFim;
-            $scope.descricao =  $scope.viagem.descricao;
-            $scope.pais =  $scope.viagem.pais;
-            $scope.cidade =  $scope.viagem.cidade;
-            $scope._user =  $scope.viagem._user.nome;
-            $scope.image = [];
-            App.unblockUI();
-        
+            $scope.viagemView = response.data.Data;
+            App.init();
+            //if ($scope.viagemView.partilhado)
+                //$('.switch-view').val($scope.viagemView.partilhado);
+                $('#modalViagem').modal({ show: 'true' });   
             var coords = [];
-                setTimeout(function(){
-                 
-                        coords.push({
-                            lat: $scope.viagem.latitude,
-                            lng: $scope.viagem.longitude,
-                            descricao: $scope.viagem.pais + " - " + $scope.viagem.cidade
-                        });
-              
-             });
-            
+            setTimeout(function(){
+                
+                coords.push({
+                    lat: $scope.viagemView.latitude,
+                    lng: $scope.viagemView.longitude,
+                    descricao: $scope.viagemView.pais + " - " + $scope.viagemView.cidade
+                });
                 MapsGoogle.mapLoadMarkers(coords);
 
-        });   
-
-           
-
-    }
-
-
-    $scope.getViagemById = function(viagem)
-    {
-        $http({ 
-            method: 'GET',
-            url: '/api/v2/viagens/' + viagem.id,
-        }).then(function (response) {            
-            $scope.viagem = response.data.Data; 
-            $scope.dataInicio =  $scope.viagem.dataInicio;
-            $scope.dataFim =   $scope.viagem.dataFim;
-            $scope.descricao =  $scope.viagem.descricao;
-            $scope.pais =  $scope.viagem.pais;
-            $scope.cidade =  $scope.viagem.cidade;
-            $scope._user =  $scope.viagem._user.nome;
-            $scope.image = [];
-            App.unblockUI();
-        
-        });   
-    }
-
-
-    $scope.removerViagem = function(viagem){
-    
-        App.blockUI({ boxed: true });
-        $http({ 
-           method: 'DELETE',
-           url: '/api/v2/viagens/' + viagem.id
-        }).then(function (response) {
-
-            toastr.success('Viagem removida!');
-
-            $scope.getViagensAll();
-            App.unblockUI();
+                App.init();
+               
+                App.unblockUI();
+                App.init();
+             },1000);                
         });
-
-    
     }
-    
 });
