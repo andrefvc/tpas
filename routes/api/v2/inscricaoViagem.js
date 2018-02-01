@@ -15,8 +15,29 @@ router.get('/', tools.isAuthenticated, function(req, res, next) {
     });
 });
 
-router.get('/viagemUser/:idViagem', tools.isAuthenticated, function(req, res, next) {    
-    incricaoViagemCtrl.find({idViagem:req.params.idViagem,idUtilizador:req.user[0]._doc.id}, function(err, result){
+
+router.get('/:id', tools.isAuthenticated, function(req, res, next) {
+    incricaoViagemCtrl.findById(req.params.id, null, function(err, result) {
+        if(err)
+            return res.status(400).jsonp(tools.parseError(err));        
+            
+        return res.status(200).jsonp(tools.parseData(result[0]));
+    });
+});
+
+
+router.get('/viagem/:idViagem', tools.isAuthenticated, function(req, res, next) {
+    incricaoViagemCtrl.find({idViagem:req.params.idViagem}, null, function(err, result) {
+        if(err)
+            return res.status(400).jsonp(tools.parseError(err));        
+            
+        return res.status(200).jsonp(tools.parseData(result));
+    });
+});
+
+
+router.get('/viagem/:idViagem/utilizador/:idUtilizador', tools.isAuthenticated, function(req, res, next) {    
+    incricaoViagemCtrl.find({idViagem:req.params.idViagem, idUtilizador:req.params.idUtilizador}, function(err, result){
   
         if(err)
             return res.status(400).jsonp(tools.parseError(err));        
@@ -25,7 +46,7 @@ router.get('/viagemUser/:idViagem', tools.isAuthenticated, function(req, res, ne
     });
 });
 
-router.get('/viagem/:idViagem/utilizador/:idUtilizador', tools.isAuthenticated, function(req, res, next) {    
+router.put('/viagem/:idViagem/utilizador/:idUtilizador', tools.isAuthenticated, function(req, res, next) {    
     incricaoViagemCtrl.find({idViagem:req.params.idViagem,idUtilizador:req.params.idUtilizador}, function(err, result){
   
                  var incricaoViagem = { 
@@ -87,55 +108,5 @@ router.get('/viagem/:idViagem/utilizador/:idUtilizador', tools.isAuthenticated, 
 
     });
 });
-
-router.get('/:id', tools.isAuthenticated, function(req, res, next) {
-    incricaoViagemCtrl.findById(req.params.id, null, function(err, result) {
-        if(err)
-            return res.status(400).jsonp(tools.parseError(err));        
-            
-        return res.status(200).jsonp(tools.parseData(result[0]));
-    });
-});
-
-router.get('/viagem/:idViagem', tools.isAuthenticated, function(req, res, next) {
-    incricaoViagemCtrl.find({idViagem:req.params.idViagem}, null, function(err, result) {
-        if(err)
-            return res.status(400).jsonp(tools.parseError(err));        
-            
-        return res.status(200).jsonp(tools.parseData(result));
-    });
-});
-
-/*
-router.post('/', tools.isAuthenticated, function (req, res) {
-
-        var incricaoViagem = { 
-            "idUtilizador": req.body.idUtilizador,
-            "idViagem": req.body.idViagem,
-            "dataInscricao": req.body.dataInscricao
-        };
-        incricaoViagemCtrl.insert(incricaoViagem, function(err, result) {
-            if(!err) {
-                return res.status(200).jsonp(tools.parseData(result));
-            } else {
-                return res.status(400).jsonp(tools.parseError(err));
-            }
-        });  
-});
- 
- 
-router.delete('/viagem/:idViagem/utilizador/:idUtilizador', tools.isAuthenticated, function(req, res, next) {    
-    incricaoViagemCtrl.find({idViagem:req.params.idViagem,idUtilizador:req.params.idUtilizador}, function(err, result){
-        if (err)
-            return res.status(400).jsonp(tools.parseError(err));     
-
-            incricaoViagemCtrl.remove(req.params.id, function(err, result) {
-            if(err)
-                return res.status(400).jsonp(tools.parseError(err));     
-            return res.status(200).jsonp(tools.parseData(result)); 
-        });    
-    });
-});
-*/
 
 module.exports = router;

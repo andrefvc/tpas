@@ -15,27 +15,12 @@ app.controller("gestaoCtrl", function($q, $scope, $http, $rootScope, $timeout, $
         }).then(function (response) {            
                 $scope.viagens = response.data.Data;                
                 App.unblockUI();
-                App.init();
-            });   
+                setTimeout(function(){
+                    App.init();
+                });
+        });   
     };
-
-
-
-
-    $scope.GridGestao = {
-        // should return your data (an array)        
-        getData: function () { return $scope.getViagensAll; }, 
-               
-        options: { 
-            showDelete: true,
-            columns: [{ field: 'descricao'}, 
-            { field: '_user.nome' },
-             { field: 'partilhado' }]
-        }
-
-        
-    }
-        
+ 
 
 
     $scope.aprovarViagem = function(viagem){

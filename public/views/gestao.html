@@ -52,84 +52,71 @@
     </div>
   </div>
 </div>
-
-<div class="container-fluid" >
-<div ng-init="getViagensAll(); " ng-show="currentUser" class="portlet-body">
  
-</div>
+<div ng-init="getViagensAll(); " ng-show="currentUser" class="portlet-body">
 
-<h1 class="page-title"> Gestão
-</h1>
+<h1 class="page-title"> Gestão</h1>
 
-<div class="blog-page blog-content-1">
-    <div class="row">
+    <div class="blog-page blog-content-1">
+        <div class="row" style="height: 450px; overflow: scroll;" >
 
-        <div simple-grid="GridGestao"></div>
-    <table class="display projects-table table table-striped table-bordered table-hover">
-                   
-        <thead> 
-            <tr>
-             
-                    <th style="width:30%">
-                        Viagem
-                    </th>
-                    <th style="width:30%" >
-                        Utilizador
-                    </th>
-                    <th style="width:30%">
-                        Pública
-                    </th>
-                    <th style="width:30%">
-                        Acções
-                    </th>
-                
-        
-            </tr>
-        </thead>
-        <tbody>   
-                <tr ng-repeat="viagem in viagens">
-                    
-                <div class="col-md-4">
-                    <td>
-                        {{viagem.descricao}}
-                    </td>
-                </div>
-                    <div class="col-md-4">  
-                    <td >
-                        {{viagem._user.nome}}  
-                    </td>
-                </div>
-                    <div class="col-md-1"> 
-                    <td>
-                      <input type="checkbox" class="make-switch" data-on-text="&nbsp;Sim&nbsp;" data-off-text="&nbsp;Não&nbsp;" ng-checked="{{viagem.partilhado}}">                                                                
-                    </td>
-                </div>
-                <div class="col-md-3"> 
-                    <td>
-                      
-                            <div class="col-md-4">
-                                 <div   style="cursor:pointer" ng-click="openModalViagem(viagem)" title="Info" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
-                                     <i class="fa fa-info"></i><!--info-->
-                                  </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div   style="cursor:pointer" title="Aprovar" ng-click="aprovarViagem(viagem)" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
-                                     <i class="fa fa-check"></i> <!--check-->
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div   style="cursor:pointer" title="Remover" ng-click="removerViagem(viagem)" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
-                                     <i class="fa fa-trash-o"></i>
-                                </div>
-                            </div>                               
+            
+            <table class="display projects-table table table-striped table-bordered table-hover">
                         
-                    </td>
-                </div>
-                </tr>
-        </tbody>      
-    </table>
-  
-  </div>
-</div>
+                <thead> 
+                    <tr>             
+                        <th style="width:30%">
+                            Viagem
+                        </th>
+                        <th style="width:30%" >
+                            Utilizador
+                        </th>
+                        <th style="width:30%">
+                            Pública
+                        </th>
+                        <th style="width:30%">
+                            Acções
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>   
+                    <tr ng-repeat="viagem in viagens">
+                        
+                            <td>
+                                {{viagem.descricao}}
+                            </td>
+                        
+                        
+                            <td >
+                                {{viagem._user.nome}}  
+                            </td>
+                        
+                        
+                            <td>
+                            <input type="checkbox" class="make-switch" data-on-text="&nbsp;Sim&nbsp;" data-off-text="&nbsp;Não&nbsp;" ng-checked="{{viagem.partilhado}}">                                                                
+                            </td>
+                        
+                            <td>
+                                <div class="col-md-4">
+                                        <div   style="cursor:pointer" ng-click="openModalViagem(viagem)" title="Info" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
+                                            <i class="fa fa-info"></i><!--info-->
+                                        </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div   style="cursor:pointer" title="Aprovar" ng-click="aprovarViagem(viagem)" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
+                                            <i class="fa fa-check"></i> <!--check-->
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div   style="cursor:pointer" title="Remover" ng-click="removerViagem(viagem)" class="ribbon ribbon-vertical-right ribbon-color-default uppercase">
+                                            <i class="fa fa-trash-o"></i>
+                                    </div>
+                                </div>    
+                            </td>
+                        </tr>
+                </tbody>      
+            </table>    
+        </div>
+    </div>
 
 </div>

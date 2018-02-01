@@ -59,7 +59,7 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
                    
                             $http({
                                 method: 'GET',
-                                url:'/api/v2/inscricaoViagem/viagemUser/' + $location.search().idViagem,
+                                url:'/api/v2/inscricaoViagem/viagem/' + $location.search().idViagem + '/utilizador/' + $rootScope.currentUser.id,
                     
                             }).then(function (responseVld) {
                     
@@ -294,9 +294,8 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
 
         $http({
             method: 'GET',
-            url:'/api/v2/inscricaoViagem/viagemUser' + idViagem,
-
-        }).then(function (response) {
+            url:'/api/v2/inscricaoViagem/viagem/' + idViagem + '/utilizador/' + $rootScope.currentUser.id
+                }).then(function (response) {
 
             $scope.incrito = response.data.Data;
             if($scope.incrito.length > 0)
@@ -319,7 +318,7 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
 
         App.blockUI({ boxed: true });
         $http({
-            method: 'GET',
+            method: 'PUT',
             url: '/api/v2/inscricaoViagem/viagem/'+ $location.search().idViagem +'/utilizador/'+ $rootScope.currentUser.id ,
         }).then(function (response) {
                 $scope.incrito = response.data.Data;
