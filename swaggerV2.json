@@ -2105,6 +2105,329 @@
           }
         }
       }
+    },
+    "/dashboard": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "summary": "Painel de informação da aplicação",
+        "description": "Obtem resumo sobre a informação existente na aplicação",
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/viagens/pais/{pais}": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "summary": "Painel de informação sobre viagens a um país",
+        "description": "Obtem resumo sobre as viagens a um país",
+        "parameters": [
+          {
+            "name": "pais",
+            "in": "path",
+            "description": "ID do país",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/inscricaoViagem": {
+      "get": {
+        "tags": [
+          "Inscrição"
+        ],
+        "summary": "Obtem todas as inscrições",
+        "description": "Obtem todas as inscrições",
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/inscricaoViagem/{idViagem}": {
+      "get": {
+        "tags": [
+          "Inscrição"
+        ],
+        "summary": "Obtem um inscrição por ID",
+        "description": "Obtem um inscrição por ID",
+        "parameters": [
+          {
+            "name": "idViagem",
+            "in": "path",
+            "description": "ID do país",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/inscricaoViagem/viagem/{idViagem}": {
+      "get": {
+        "tags": [
+          "Inscrição"
+        ],
+        "summary": "Obtem todas as inscrições de uma viagem",
+        "description": "Obtem todas as inscrições de uma viagem",
+        "parameters": [
+          {
+            "name": "idViagem",
+            "in": "path",
+            "description": "ID do país",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/inscricaoViagem/viagem/{idViagem}/utilizador/{idUtilizador}": {
+      "get": {
+        "tags": [
+          "Inscrição"
+        ],
+        "summary": "Obtem todas as inscrições de uma viagem e de um utilizador",
+        "description": "Obtem todas as inscrições de uma viagem e de um utilizador",
+        "parameters": [
+          {
+            "name": "idViagem",
+            "in": "path",
+            "description": "ID do país",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "idUtilizador",
+            "in": "path",
+            "description": "ID do país",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Inscrição"
+        ],
+        "summary": "Faz a gestão da inscrição de um utilizador a uma viagem",
+        "description": "Faz a gestão da inscrição de um utilizador a uma viagem",
+        "parameters": [
+          {
+            "name": "idViagem",
+            "in": "path",
+            "description": "ID do país",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "idUtilizador",
+            "in": "path",
+            "description": "ID do país",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta com sucesso",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta inválida",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          },
+          "401": {
+            "description": "Utilizador não autenticado",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Response"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
