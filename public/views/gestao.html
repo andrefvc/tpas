@@ -11,57 +11,47 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
         <h4 class="modal-title">Detalhes Viagem</h4>
     </div>
-    <div class="modal-body">
+  <div class="modal-body">
        
-       <div class="form-group">
-            <div class="col-md-4">
-                    <label class="input-group-addon"> Utilizador</label>
-                    <input ng-readonly="true" ng-model="_user" type="text" class="form-control" name="nome"> 
-            </div>
-            <label class="control-label col-md-2">Período</label>
-            <div class="col-md-8">
+    <div class="form-group">
+        <div class="form-group">
+                <label class="control-label col-md-2">Período</label>
+                <div class="col-md-8">
                     <div class="input-group input-medium date-picker input-daterange" data-date-format="dd-mm-yyyy">
                         <input ng-readonly="true" ng-model="dataInicio" type="text" class="form-control" name="from">
                         <span class="input-group-addon"> to </span>
                         <input ng-readonly="true" ng-model="dataFim" type="text" class="form-control" name="to"> 
                     </div>
                     <!-- /input-group -->
-            </div>
-      </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-6">
-                        <span class="input-group-addon"> Descrição </span>
-                        <input ng-readonly="true" ng-model="descricao" type="textarea" class="form-control" name="Descricao"> 
                 </div>
-                <div class="col-md-6">
-                     <img src="{{ viagem.ficheiros.nome }}"  />
+                <div class="col-md-2">
+                    <div >
+                            <label class="input-group-addon"> Utilizador</label>
+                            <input ng-readonly="true" ng-model="_user" type="text" class="form-control" name="nome"> 
+                    </div>
                 </div>
-            </div>
         </div>
+            
+           <div class="row"></div>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <span class="input-group-addon"> Descrição </span>
+                    <textarea ng-model="descricao" ng-readonly="true" class="form-control todo-taskbody-taskdesc" rows="9"></textarea>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <img src="{{ viagem.ficheiros.nome }}"  />
+            </div>
 
-        <div class="form-group ">
-            <div class="col-md-12">
-                <div class="col-md-6">
-                        <span class="input-group-addon"> pais</span>
-                        <input ng-readonly="true" ng-model="pais" type="text" class="form-control" name="pais"> 
-                </div>
-                
-                <div class="col-md-6">
-                        <span class="input-group-addon"> cidade</span>
-                        <input ng-readonly="true" ng-model="cidade" type="text" class="form-control" name="cidade"> 
-                </div>
-                
+            <div class="form-group ">
+                <div class="col-md-12">
+                       <div id="gmap_geocoding" class="gmaps"> </div>
+                 </div>
             </div>
-        </div>
-                <div class="search-container ">
-                    <div id="gmap_geocoding" class="gmaps"> </div>            
-                </div>
         
     </div>
+  </div>
 </div>
-
-
 
 <div class="container-fluid" >
 <div ng-init="getViagensAll(); " ng-show="currentUser" class="portlet-body">

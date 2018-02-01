@@ -30,13 +30,13 @@
                         <div class="form-group">
                                 <div class="col-md-6">
                                     <div ng-show ="perfil > 0" >
-                                        <span class="input-group-addon"> Max Inscricoes </span>
+                                        <span class="input-group-addon"> Máximo Inscriçõess </span>
                                         <input ng-model="maxIncricoes"  class="form-control"> 
                                     </div>
                                 </div>  
                                 <div class="col-md-6">
                                     <div ng-show ="perfil > 0" >
-                                        <span class="input-group-addon"> preco </span>
+                                        <span class="input-group-addon"> Preço </span>
                                         <input ng-model="preco"  class="form-control"> 
                                     </div>
                                 </div>  
@@ -144,16 +144,21 @@
                          class="ribbon ribbon-vertical-right uppercase" ng-class="{ 'ribbon-color-warning': viagem.partilhado }">
                             <i class="fa fa-share-alt"></i>
                         </div>
-                        <div ng-show="viagem._user.perfil > 0" id="incritoViagem"   style="cursor:pointer; color: white;" title="Preco"
-                         class="ribbon  uppercase" >
-                            {{viagem.preco}}€
-                        </div>
+                        
                         <div ng-click="openMomentos(viagem);">
+                               
                             <a href="javascript:;">
                                 <img src="{{ viagem.ficheiros.nome }}" />
                             </a>
+                            <div ng-show="viagem._user.perfil > 0" id="incritoViagem"   style="cursor:pointer;color: white;margin-top: 40px;" title="Preco"
+                                    class="ribbon  uppercase" >
+                                       {{viagem.preco}}€
+                                   </div>
                         </div>
+                       
                     </div>
+                    
+
                     <div class="blog-post-content">
                         <h2 class="blog-title blog-post-title">
                             <a href="javascript:;">{{ viagem.pais }}</a> <small>{{ viagem.cidade }}</small>

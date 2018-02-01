@@ -117,11 +117,13 @@
 </div>
 <div class="col-md-3"></div>
 <div class="col-md-2"></div>
-<div class="col-md-1">
-    <span>Nº Inscritos</span>
+<div class="col-md-1" ng-show="viagem._user.perfil > 0">
+    <span title="Nº Inscritos">
+            <i class="fa fa-users"></i>
+    </span>    
     <span> {{nInscritos}}</span>
 </div>
-<div class="col-md-3">
+<div class="col-md-2">
 <button  id="btnIncricao"  style="display:none;"  title="Inscrever"  ng-click="increveViagem();" class="btn btn-outline green"> 
     
 </button>
