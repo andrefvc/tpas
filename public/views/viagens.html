@@ -150,10 +150,8 @@
                             <a href="javascript:;">
                                 <img src="{{ viagem.ficheiros.nome }}" />
                             </a>
-                            <div ng-show="viagem._user.perfil > 0" id="incritoViagem"   style="background-color:transparent; border: 1px #c29d0b; cursor:pointer;color: white;margin-top: 40px;" title="Preco"
-                                    class="ribbon  uppercase" >
-                                       {{viagem.preco}}€
-                                   </div>
+                            <div ng-show="viagem._user.perfil > 0" id="incritoViagem"   style="cursor:pointer; width: 56px;" title="Preço de Inscrição"
+                                class="ribbon ribbon-vertical-right ng-binding ribbon-color-info uppercase" > {{viagem.preco}}€</div>
                         </div>
                        
                     </div>

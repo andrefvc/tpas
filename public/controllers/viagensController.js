@@ -182,29 +182,6 @@ app.controller("viagensCtrl", function($q, $scope, $http, $rootScope, $timeout, 
             });   
     };
 
-    $scope.incrito
-
-    $scope.increveViagem= function(viagem){
-
-        App.blockUI({ boxed: true });
-        $http({ 
-            method: 'GET',
-            url: '/api/v2/inscricaoViagem/viagem/'+  viagem.id +'/utilizador/'+ $rootScope.currentUser.id ,
-        }).then(function (response) {            
-                $scope.incrito = response.data.Data;   
-                if($scope.incrito.id != undefined)
-                {
-                    $("#incritoViagem").attr("style","background-color:#F1C40F")
-                }
-                else{
-                    $("#incritoViagem").attr("style","background-color:#aaa")
-                }
-                         
-                App.unblockUI();
-                App.init();
-       });  
-
-    }
 
     $scope.maxIncricoes=0;
     $scope.preco = 0;

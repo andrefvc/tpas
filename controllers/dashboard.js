@@ -33,10 +33,10 @@ function getViagensGroupByPais(callback) {
                         return x.idViagem == viagem._doc.id 
                     })
 
-                    //array apenas com o que importa
+                    //array de viagens apenas com o que importa
                     viagensDTO.push({
                         pais: viagem._doc.pais,
-                        ocupacao: ((inscritos.count() / users.length) * 100),
+                        ocupacao: inscritos.count() == 0 ? 0 : ((inscritos.count() * 100) / viagem.maxIncricoes),
                         classificacoes: viagem._doc.sumClass1 + viagem._doc.sumClass2 + viagem._doc.sumClass3,
                         comentarios: viagem._doc.sumComentarios,
                         visualizacoes: viagem._doc.visualizacoes,     
@@ -55,7 +55,7 @@ function getViagensGroupByPais(callback) {
                             ocupacao: x.sum(function(y){ return y.ocupacao; }).toFixed(0),
                             classificacoes: x.sum(function(y){ return y.classificacoes|0; }),
                             comentarios: x.sum(function(y){ return y.comentarios|0; }),
-                            visualizacoes: x.sum(function(y){ return y.visualizacoes|0; })                 
+                            visualizacoes: x.sum(function(y){ return y.visualizacoes|0; })       
                         };
                     })
                     .toArray();
@@ -90,8 +90,8 @@ function getViagensGroupByPais(callback) {
                     .toArray();
 
                 var result = {
-                    taxaInscritos: ((usersInscritos.length / users.length) * 100).toFixed(2),
-                    taxaEscursoes: ((escursoes.length / viagens.length) * 100).toFixed(2),
+                    taxaInscritos: ((usersInscritos.length * 100) / users.length).toFixed(2),
+                    taxaEscursoes: ((escursoes.length * 100) / viagens.length).toFixed(2),
                     Numviagens: viagens.length,
                     NumUtilizadores: users.length,
                     viagensByPais: viagensByPais,
@@ -136,7 +136,7 @@ function getViagensByPais(data, callback) {
                         cidade: viagem._doc.cidade,
                         data: viagem._doc.dataInicio,
                         imagem: viagem._doc.ficheiros.nome,
-                        ocupacao: ((inscritos.count() / users.length) * 100),
+                        ocupacao: inscritos.count() == 0 ? 0 : ((inscritos.count() * 100) / viagem.maxIncricoes).toFixed(0),
                         classificacoes: viagem._doc.sumClass1 + viagem._doc.sumClass2 + viagem._doc.sumClass3,
                         comentarios: viagem._doc.sumComentarios,
                         visualizacoes: viagem._doc.visualizacoes,                
