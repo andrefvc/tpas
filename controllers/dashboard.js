@@ -10,7 +10,8 @@ var inscricoesCtrl = require('../controllers/inscricaoViagem.js');
 function getViagensGroupByPais(callback) {      
         
     var viagensDTO = [];
-    
+    var countVagas = 0;
+
     // contar todos os users
     utilizadoresCtrl.findAll({ id: 1 }, function (err, users) {
         if (err)
@@ -27,6 +28,8 @@ function getViagensGroupByPais(callback) {
                     callback(err);
             
                 viagens.forEach(viagem => {
+
+                    countVagas += viagem.maxIncricoes;
 
                     //users inscritos para cada viagem
                     var inscritos = Enumerable.from(usersInscritos).where(function(x){ 
@@ -90,7 +93,7 @@ function getViagensGroupByPais(callback) {
                     .toArray();
 
                 var result = {
-                    taxaInscritos: ((usersInscritos.length * 100) / users.length).toFixed(2),
+                    taxaInscritos: ((usersInscritos.length * 100) / countVagas).toFixed(2),
                     taxaEscursoes: ((escursoes.length * 100) / viagens.length).toFixed(2),
                     Numviagens: viagens.length,
                     NumUtilizadores: users.length,
@@ -141,7 +144,8 @@ function getViagensByPais(data, callback) {
                         comentarios: viagem._doc.sumComentarios,
                         visualizacoes: viagem._doc.visualizacoes,                
                         partilhado: viagem._doc.partilhado,      
-                        aprovado: viagem._doc.aprovado          
+                        aprovado: viagem._doc.aprovado,
+                        utilizador: viagem._doc._user.nome
                     });
                 });
 

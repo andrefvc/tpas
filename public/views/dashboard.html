@@ -74,7 +74,7 @@
                     <th title="Taxa de ocupação"><i class="fa fa-fw fa-taxi text-muted hidden-md hidden-sm hidden-xs"></i> Ocupação</th>
                     <th title="Visualizações | Comentários | Classificações"><i class="fa fa-fw fa-hand-pointer-o text-muted hidden-md hidden-sm hidden-xs"></i > VCC</th>                    
                         <th><i class="fa fa-share-alt fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Publico-alvo</th>
-                    <th><i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i> Estado</th>
+                    <th><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Utilizador</th>
                 </tr>
             </thead>
             <tbody>
@@ -87,12 +87,12 @@
                         </div>
                     </td>
                     <td title="Taxa de ocupação">
-                        <div class='progress progress-xs' data-progressbar-value='{{viagem.ocupacao}}'><div class='progress-bar'></div></div>
+                        <div ng-show="viagem._user.perfil != 1" class='progress progress-xs' data-progressbar-value='{{viagem.ocupacao}}'><div class='progress-bar'></div></div>
                     </td>
                     
                     <td title="{{viagem.visualizacoes}} Visualizações | {{viagem.comentarios}} Comentários | {{viagem.classificacoes}} Classificacoes">{{viagem.visualizacoes}} | {{viagem.comentarios}} | {{viagem.classificacoes}}</td>
                     <td title="{{viagem.partilhado ? 'Partilhada com: Público' : 'Partilhada com: Apenas eu'}}"><i class="fa fa-circle font-xs"  ng-class="viagem.partilhado ? 'txt-color-greenLight' : 'text-default'"></i></td>
-                    <td><span class='label' ng-class="viagem.aprovado ? 'label-success' : 'label-default'">{{viagem.aprovado ? 'Aprovada' : 'Rejeitada'}}</span></td>
+                    <td>{{viagem.utilizador}}</span></td>
                 </tr>
             </tbody>
         </table> 
