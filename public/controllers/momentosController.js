@@ -86,8 +86,8 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
                                     method: 'GET',
                                     url:'api/v2/inscricaoViagem/viagem/'+ $location.search().idViagem
                                 }).then(function (responseTotal) {
-                                            
-                                    $scope.nInscritos = responseTotal.data.Data.length
+                                    var x = responseTotal.data.Data.length + "/" + $scope.viagem.maxIncricoes
+                                    $scope.nInscritos = x ;
 
                                 });
                             });
