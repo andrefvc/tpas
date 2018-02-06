@@ -88,8 +88,6 @@ router.put('/viagem/:idViagem/utilizador/:idUtilizador', tools.isAuthenticated, 
                             }
                          }); 
 
-                    //return res.status(200).jsonp(tools.parseData(rincricoes));
-
                  });
                 
             });

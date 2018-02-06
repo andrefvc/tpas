@@ -332,6 +332,7 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
                 $scope.incrito = response.data.Data;
                 if($scope.incrito.id != undefined)
                 {
+
                     $("#btnIncricao")[0].innerText = "Remover Inscrição"
                     $("#btnNew").css('display','block');
                 }
@@ -340,6 +341,14 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
                     $("#btnNew").css('display','none');
                 }
     
+                $http({
+                    method: 'GET',
+                    url:'api/v2/inscricaoViagem/viagem/'+ $location.search().idViagem
+                }).then(function (responseTotal) {
+                    var x = responseTotal.data.Data.length + "/" + $scope.viagem.maxIncricoes
+                    $scope.nInscritos = x ;
+
+                });
 
                 App.unblockUI();
                 App.init();

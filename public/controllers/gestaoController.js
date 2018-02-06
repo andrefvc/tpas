@@ -61,7 +61,9 @@ app.controller("gestaoCtrl", function($q, $scope, $http, $rootScope, $timeout, $
             url: '/api/v2/viagens/' + idViagem,
         }).then(function (response) {            
             $scope.viagemView = response.data.Data;
-        
+
+            $('#modalViagem').modal({ show: 'true' }); 
+
             var coords = [];
             setTimeout(function(){
                 
@@ -72,7 +74,7 @@ app.controller("gestaoCtrl", function($q, $scope, $http, $rootScope, $timeout, $
                 });
                 MapsGoogle.mapLoadMarkers(coords);
                 
-                $('#modalViagem').modal({ show: 'true' });   
+                
                 // init datepicker
                 $('.date-picker').datepicker({
                     rtl: App.isRTL(),
@@ -82,7 +84,7 @@ app.controller("gestaoCtrl", function($q, $scope, $http, $rootScope, $timeout, $
 
                 App.unblockUI();
                 App.init();
-             },1000);                
+             },500);                
         });
     }
 });
