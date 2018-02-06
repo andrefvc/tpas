@@ -10,12 +10,12 @@
   },
   "externalDocs": {
     "description": "Source Code",
-    "url": "https://github.com/andrefvc/tppweb"
+    "url": "https://github.com/andrefvc/tpas"
   },
   "produces": [
     "application/json"
   ],
-  "host": "tppweb.herokuapp.com",
+  "host": "trips-together.herokuapp.com",
   "basePath": "/api/v2",
   "paths": {
     "/viagens": {
