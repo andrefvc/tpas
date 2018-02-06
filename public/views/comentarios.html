@@ -27,12 +27,14 @@
             <div style="max-height: 600px;" class="col-md-12">
                 <div  class="todo-tasklist" ng-repeat="comentario in comentarios | orderBy : '-dataInsercao' ">
                     <div class="todo-tasklist-item todo-tasklist-item-border-green mt-element-ribbon">
-                        <div id="removeCommentViagemBtn" ng-show="isOwner(comentario.idUtilizador);" ng-click="removerComentario(comentario);"  class="ribbon ribbon-right ribbon-color-default uppercase " style="cursor:pointer" title="Remover" >
+                        <div ng-show="isOwner(comentario.idUtilizador);">
+                        <div id="removeCommentViagemBtn" ng-click="removerComentario(comentario);"  class="removeCommentViagemBtn ribbon ribbon-right ribbon-color-default uppercase " style="cursor:pointer" title="Remover" >
                             <i class="fa fa-trash-o"></i>
                         </div> 
-                        <div id="removeCommentMomentosBtn" ng-show="isOwner(comentario.idUtilizador);" ng-click="removerComentarioMomento(comentario);"  class="ribbon ribbon-right ribbon-color-default uppercase " style="cursor:pointer" title="Remover" >
+                        <div id="removeCommentMomentosBtn" ng-click="removerComentarioMomento(comentario);"  class="removeCommentMomentosBtn ribbon ribbon-right ribbon-color-default uppercase " style="cursor:pointer" title="Remover" >
                             <i class="fa fa-trash-o"></i>
-                        </div>                       
+                        </div> 
+                    </div>                      
                         <img ng-show="comentario.foto" class="todo-userpic pull-left" src="{{comentario._user.foto}}" width="27px" height="27px">
                         <div class="todo-tasklist-item-title"> {{ comentario._user.nome}} </div>
                         <div class="todo-tasklist-item-text"> {{ comentario.comentario }} </div>

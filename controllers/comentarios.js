@@ -103,7 +103,7 @@ function inserir(req, comentario, callback){
             return callback(err);
 
         if (comentario.idMomento){
-            momentosCtrl.findById(comentario.idMomento, { sumComentarios:1, cidade:1, pais:1, _user:1, idUtilizador:1 }, function(err, momento){
+            momentosCtrl.findById(comentario.idMomento, { sumComentarios:1, cidade:1, pais:1, _user:1, idUtilizador:1, idViagem: 1 }, function(err, momento){
                 if(err)
                     return callback(err);
 

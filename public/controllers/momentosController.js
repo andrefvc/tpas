@@ -199,9 +199,9 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
             $('#comentMomentoBtn').css('display','block');
 
             setTimeout(function() {
-                $('#removeCommentMomentosBtn').css('display','block');
-                $('#removeCommentViagemBtn').css('display','none');
-            }, 500);
+                $('.removeCommentMomentosBtn').css('display','block');
+                $('.removeCommentViagemBtn').css('display','none');
+            }, 5);
 
         }, function (response) {
 
@@ -213,9 +213,9 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
             $('#comentMomentoBtn').css('display','block');
 
             setTimeout(function() {
-                $('#removeCommentMomentosBtn').css('display','block');
-                $('#removeCommentViagemBtn').css('display','none');
-            }, 500);
+                $('.removeCommentMomentosBtn').css('display','block');
+                $('.removeCommentViagemBtn').css('display','none');
+            }, 5);
         });
     };
 
@@ -271,9 +271,9 @@ app.controller("momentosCtrl", function($q, $scope, $http, $rootScope, $timeout,
             App.unblockUI();
 
             setTimeout(function() {
-                $('#removeCommentMomentosBtn').css('display','block');
-                $('#removeCommentViagemBtn').css('display','none');
-            }, 500);
+                $('.removeCommentMomentosBtn').css('display','block');
+                $('.removeCommentViagemBtn').css('display','none');
+            }, 5);
         });
     };
 

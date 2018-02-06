@@ -93,9 +93,9 @@ app.controller("viagensCtrl", function($q, $scope, $http, $rootScope, $timeout, 
             $('#comentMomentoBtn').css('display','none');
 
             setTimeout(function() {
-                $('#removeCommentMomentosBtn').css('display','none');
-                $('#removeCommentViagemBtn').css('display','block');    
-            }, 500);
+                $('.removeCommentMomentosBtn').css('display','none');
+                $('.removeCommentViagemBtn').css('display','block');    
+            }, 5);
 
             }, function (response) {
                 
@@ -108,9 +108,9 @@ app.controller("viagensCtrl", function($q, $scope, $http, $rootScope, $timeout, 
                 $('#comentMomentoBtn').css('display','none');
 
                 setTimeout(function() {
-                    $('#removeCommentMomentosBtn').css('display','none');
-                    $('#removeCommentViagemBtn').css('display','block');    
-                }, 500);
+                    $('.removeCommentMomentosBtn').css('display','none');
+                    $('.removeCommentViagemBtn').css('display','block');    
+                }, 5);
         });           
     };
     
@@ -148,9 +148,9 @@ app.controller("viagensCtrl", function($q, $scope, $http, $rootScope, $timeout, 
             App.unblockUI();
 
             setTimeout(function() {
-                $('#removeCommentMomentosBtn').css('display','none');
-                $('#removeCommentViagemBtn').css('display','block');    
-            }, 500);
+                $('.removeCommentMomentosBtn').css('display','none');
+                $('.removeCommentViagemBtn').css('display','block');    
+            }, 5);
             });           
     };
 
